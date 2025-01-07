@@ -1,4 +1,4 @@
-package com.gestion.Orphelins;
+package com.gestion.orphelins;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
