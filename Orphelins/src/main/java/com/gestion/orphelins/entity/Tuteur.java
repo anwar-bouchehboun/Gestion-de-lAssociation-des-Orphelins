@@ -17,10 +17,12 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.persistence.Table;
+import lombok.Builder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "tuteurs")
 public class Tuteur {
     @Id

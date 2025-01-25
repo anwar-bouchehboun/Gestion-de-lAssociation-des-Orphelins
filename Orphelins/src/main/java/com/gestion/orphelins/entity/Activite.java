@@ -10,19 +10,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.Positive;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "activites")
 public class Activite {
     @Id
@@ -50,6 +50,6 @@ public class Activite {
     @ManyToMany
     @JoinTable(name = "activite_orphelin", joinColumns = @JoinColumn(name = "activite_id"),
      inverseJoinColumns = @JoinColumn(name = "orphelin_id"))
-    private List<Orphelin> participants = new ArrayList<>();
+    private Set<Orphelin> participants = new HashSet<>();
 
 }

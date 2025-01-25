@@ -12,12 +12,16 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
+@Table(name = "rapports")
 public class Rapport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

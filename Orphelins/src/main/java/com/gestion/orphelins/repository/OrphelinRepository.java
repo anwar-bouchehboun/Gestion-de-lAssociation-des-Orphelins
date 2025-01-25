@@ -8,7 +8,9 @@ import java.util.List;
 @Repository
 public interface OrphelinRepository extends JpaRepository<Orphelin, Long> {
     List<Orphelin> findByTuteurId(Long tuteurId);
-    List<Orphelin> findByNomContaining(String nom, String prenom);
+
+    List<Orphelin> findByNomContaining(String nom);
+
     List<Orphelin> findByAge(int age);
 
     List<Orphelin> findByGenre(String genre);
