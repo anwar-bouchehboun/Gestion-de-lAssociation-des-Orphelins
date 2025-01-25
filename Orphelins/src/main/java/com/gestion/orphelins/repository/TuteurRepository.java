@@ -12,4 +12,8 @@ public interface TuteurRepository extends JpaRepository<Tuteur, Long> {
         boolean existsByEmail(String email);
 
         boolean existsByTelephone(String telephone);
+
+        Optional<Tuteur> findByNomContaining(String nom);
+
+        Optional<Tuteur> findByTelephone(String telephone);
 }

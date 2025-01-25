@@ -18,6 +18,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.persistence.Table;
 import lombok.Builder;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,8 +40,8 @@ public class Tuteur {
     private String email;
 
     @Column(nullable = false)
-    @Pattern(regexp = "^(0|\\+212)[5-7][0-9]{8}$", message = "Le numéro de téléphone doit être au format marocain (ex: 0612345678 ou +212612345678)")
-    @NotBlank(message = "Le numéro de téléphone est obligatoire")
+    @Pattern(regexp = "^(0|\\+212)[5-7][0-9]{8}$", message = "Le numéro de téléphone doit être au format marocain")
+    @NotBlank(message = "Le téléphone est obligatoire")
     private String telephone;
 
     @Column(nullable = false)
@@ -49,5 +50,6 @@ public class Tuteur {
     private String relation;
 
     @OneToMany(mappedBy = "tuteur", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Orphelin> orphelins = new ArrayList<>();
 }
