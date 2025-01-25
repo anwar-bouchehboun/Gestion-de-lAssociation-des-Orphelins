@@ -22,7 +22,7 @@ import java.util.HashMap;
 public class TuteurController {
     private final TuteurInterface tuteurInterface;
 
-    @PostMapping
+    @PostMapping // Maps HTTP POST requests to the /api/tuteur path.
     public ResponseEntity<Map<String, Object>> createTuteur(@Valid @RequestBody requestTuteur request) {
         responseTuteur response = tuteurInterface.createTuteur(request);
         Map<String, Object> responseMap = new HashMap<>();
@@ -32,19 +32,19 @@ public class TuteurController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
     }
 
-    @PostMapping("/multiple")
+    @PostMapping("/multiple") // Maps HTTP POST requests to the /api/tuteur/multiple path.
     public ResponseEntity<List<responseTuteur>> createMultipleTuteurs(@RequestBody List<requestTuteur> requests) {
         List<responseTuteur> responses = tuteurInterface.createMultipleTuteurs(requests);
         return ResponseEntity.status(HttpStatus.CREATED).body(responses);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // Maps HTTP GET requests to the /api/tuteur/{id} path.
     public ResponseEntity<responseTuteur> getTuteurById(@Valid @PathVariable Long id) {
         responseTuteur response = tuteurInterface.getTuteurById(id);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
+    @GetMapping // Maps HTTP GET requests to the /api/tuteur path.
     public ResponseEntity<List<responseTuteur>> getAllTuteurs() {
         List<responseTuteur> response = tuteurInterface.getAllTuteurs();
         return ResponseEntity.ok(response);
@@ -56,13 +56,13 @@ public class TuteurController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/page")
+    @GetMapping("/page") // Maps HTTP GET requests to the /api/tuteur/page path.
     public ResponseEntity<Page<responseTuteur>> getAllTuteursPaginated(Pageable pageable) {
         Page<responseTuteur> response = tuteurInterface.getAllTuteursPaginated(pageable);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/tuteur/{id} path.
     public ResponseEntity<Map<String, Object>> updateTuteur(
             @Valid @PathVariable Long id,
             @Valid @RequestBody requestTuteur request) {
@@ -74,7 +74,7 @@ public class TuteurController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // Maps HTTP DELETE requests to the /api/tuteur/{id} path.
     public ResponseEntity<Map<String, String>> deleteTuteur(
             @Valid @PathVariable Long id) {
         tuteurInterface.deleteTuteur(id);
