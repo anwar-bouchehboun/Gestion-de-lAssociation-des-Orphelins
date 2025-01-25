@@ -1,7 +1,5 @@
 package com.gestion.orphelins.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import com.gestion.orphelins.services.interfaces.DonInterface;
 import com.gestion.orphelins.dto.request.requestDon;
@@ -24,9 +22,12 @@ public class DonController {
     private final DonInterface donInterface;
 
     @PostMapping
-    public ResponseEntity<responseDon> createDon(@Valid @RequestBody requestDon request) {
-        responseDon response = donInterface.createDon(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<Map<String,String>> createDon(@Valid @RequestBody requestDon request) {
+        donInterface.createDon(request);
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("status", "success");
+        responseMap.put("message", "Don créé avec succès");
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
     }
 
     @GetMapping("/{id}")
@@ -37,6 +38,11 @@ public class DonController {
 
     @GetMapping("/nomDonateur/{nomDonateur}")
     public ResponseEntity<responseDon> getDonByNomDonateur(@Valid @PathVariable String nomDonateur) {
+        responseDon response = donInterface.getDonByNomDonateur(nomDonateur);
+        return ResponseEntity.ok(response);
+    }
+     @GetMapping("/search")
+    public ResponseEntity<responseDon> getByNomDonateur(@RequestParam String nomDonateur) {
         responseDon response = donInterface.getDonByNomDonateur(nomDonateur);
         return ResponseEntity.ok(response);
     }
@@ -54,9 +60,12 @@ public class DonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<responseDon> updateDon(@Valid @PathVariable Long id, @RequestBody requestDon request) {
-        responseDon response = donInterface.updateDon(id, request);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Map<String,String>> updateDon(@Valid @PathVariable Long id, @RequestBody requestDon request) {
+        donInterface.updateDon(id, request);
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("status", "success");
+        responseMap.put("message", "Don mis à jour avec succès");
+        return ResponseEntity.ok(responseMap);
     }
 
     @DeleteMapping("/{id}")
