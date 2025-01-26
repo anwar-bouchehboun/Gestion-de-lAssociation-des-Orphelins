@@ -23,5 +23,4 @@ public class responseActivite {
     private double budget;
     @Builder.Default
     private Set<responseOrphelin> participants = new HashSet<>();
-
 }
