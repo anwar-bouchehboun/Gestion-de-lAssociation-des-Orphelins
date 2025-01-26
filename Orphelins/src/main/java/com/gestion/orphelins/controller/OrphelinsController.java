@@ -22,7 +22,7 @@ public class OrphelinsController {
 
     private final OrphelinInterface orphelinInterface;
 
-    @PostMapping
+    @PostMapping // Maps HTTP POST requests to the /api/orphelins path.
     public ResponseEntity<Map<String, Object>> createOrphelin(
             @Valid @RequestBody requestOrphelin request) {
         responseOrphelin response = orphelinInterface.createOrphelin(request);
@@ -33,7 +33,7 @@ public class OrphelinsController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping
+    @GetMapping // Maps HTTP GET requests to the /api/orphelins path.
     public ResponseEntity<Map<String, Object>> getAllOrphelins() {
         List<responseOrphelin> response = orphelinInterface.getAllOrphelins();
         Map<String, Object> responseMap = new HashMap<>();
@@ -43,12 +43,12 @@ public class OrphelinsController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping("/page")
+    @GetMapping("/page") // Maps HTTP GET requests to the /api/orphelins/page path.
     public ResponseEntity<Page<responseOrphelin>> getAllOrphelinsPaginated(Pageable pageable) {
         return ResponseEntity.ok(orphelinInterface.getAllOrphelinsPaginated(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // Maps HTTP GET requests to the /api/orphelins/{id} path.
     public ResponseEntity<Map<String, Object>> getOrphelinById(
             @Valid @PathVariable Long id) {
         responseOrphelin response = orphelinInterface.getOrphelinById(id);
@@ -59,7 +59,7 @@ public class OrphelinsController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/orphelins/{id} path.
     public ResponseEntity<Map<String, Object>> updateOrphelin(
             @Valid @PathVariable Long id,
             @Valid @RequestBody requestOrphelin request) {
@@ -71,7 +71,7 @@ public class OrphelinsController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // Maps HTTP DELETE requests to the /api/orphelins/{id} path.
     public ResponseEntity<Map<String, String>> deleteOrphelin(@Valid @PathVariable Long id) {
         orphelinInterface.deleteOrphelin(id);
         Map<String, String> response = new HashMap<>();
@@ -80,14 +80,14 @@ public class OrphelinsController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/create-all")
+    @PostMapping("/create-all") // Maps HTTP POST requests to the /api/orphelins/create-all path.
     public ResponseEntity<List<responseOrphelin>> saveAllOrphelins(
             @Valid @RequestBody List<requestOrphelin> requests) {
         return ResponseEntity.ok(orphelinInterface.saveAllOrphelins(requests));
     }
 
   
-    @GetMapping("/search") 
+    @GetMapping("/search") // Maps HTTP GET requests to the /api/orphelins/search path.
     public ResponseEntity<List<responseOrphelin>> getByNomOrphelin(@RequestParam String nomOrphelin) {
         List<responseOrphelin> response = orphelinInterface.getAllOrphelinsByNom(nomOrphelin);
         return ResponseEntity.ok(response);
