@@ -21,7 +21,7 @@ public class ActiviteController {
 
     private final ActiviteInterface activiteInterface;
 
-    @PostMapping
+    @PostMapping // create activite
     public ResponseEntity<Map<String, Object>> createActivite(@Valid @RequestBody requestActivite request) {
         responseActivite response = activiteInterface.createActivite(request);
         Map<String, Object> responseMap = new HashMap<>();
@@ -31,7 +31,7 @@ public class ActiviteController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping
+    @GetMapping // get all activites
     public ResponseEntity<Map<String, Object>> getAllActivites() {
         List<responseActivite> response = activiteInterface.getAllActivites();
         Map<String, Object> responseMap = new HashMap<>();
@@ -41,12 +41,12 @@ public class ActiviteController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping("/page")
+    @GetMapping("/page") // get all activites paginated
     public ResponseEntity<Page<responseActivite>> getAllActivitesPaginated(Pageable pageable) {
         return ResponseEntity.ok(activiteInterface.getAllActivitesPaginated(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // get activite by id
     public ResponseEntity<Map<String, Object>> getActiviteById(@Valid @PathVariable Long id) {
         responseActivite response = activiteInterface.getActiviteById(id);
         Map<String, Object> responseMap = new HashMap<>();
@@ -56,7 +56,7 @@ public class ActiviteController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // update activite
     public ResponseEntity<Map<String, Object>> updateActivite(
             @Valid @PathVariable Long id,
             @Valid @RequestBody requestActivite request) {
@@ -68,7 +68,7 @@ public class ActiviteController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // delete activite
     public ResponseEntity<Map<String, String>> deleteActivite(@Valid @PathVariable Long id) {
         activiteInterface.deleteActivite(id);
         Map<String, String> response = new HashMap<>();
@@ -77,7 +77,7 @@ public class ActiviteController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/create-all")
+    @PostMapping("/create-all") // create all activites
     public ResponseEntity<Map<String, Object>> saveAllActivites(@Valid @RequestBody List<requestActivite> requests) {
         List<responseActivite> response = activiteInterface.saveAllActivites(requests);
         Map<String, Object> responseMap = new HashMap<>();
@@ -87,7 +87,7 @@ public class ActiviteController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search") // search activites by nom
     public ResponseEntity<Map<String, Object>> searchActivites(@RequestParam String nom) {
         List<responseActivite> response = activiteInterface.getAllActivitesByNom(nom);
         Map<String, Object> responseMap = new HashMap<>();
@@ -97,7 +97,7 @@ public class ActiviteController {
         return ResponseEntity.ok(responseMap);
     }
 
-    @GetMapping("/nom")
+    @GetMapping("/nom") // get activite by nom
     public ResponseEntity<Map<String, Object>> getActiviteByNom(@RequestParam String nom) {
         responseActivite response = activiteInterface.getActiviteByNom(nom);
         Map<String, Object> responseMap = new HashMap<>();
