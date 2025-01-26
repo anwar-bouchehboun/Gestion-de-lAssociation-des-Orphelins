@@ -52,4 +52,11 @@ public class Tuteur {
     @OneToMany(mappedBy = "tuteur", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Orphelin> orphelins = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Tuteur [id=" + id +
+                ", nom=" + nom +
+                ", nombreOrphelins=" + (orphelins != null ? orphelins.size() : 0) + "]";
+    }
 }

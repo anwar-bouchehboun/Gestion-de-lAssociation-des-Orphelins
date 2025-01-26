@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import javax.persistence.Table;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,4 +56,16 @@ public class Orphelin {
     @JoinColumn(name = "tuteur_id")
     @NotNull(message = "Le tuteur est obligatoire")
     private Tuteur tuteur;
+
+    @Override
+    public String toString() {
+        return "Orphelin [id=" + id +
+                ", nom=" + nom +
+                ", age=" + age +
+                ", genre=" + genre +
+                ", etatDeSante=" + etatDeSante +
+                ", niveauEducation=" + niveauEducation +
+                ", tuteur=" + (tuteur != null ? tuteur.toString() : null) + "]";
+    }
 }
+
