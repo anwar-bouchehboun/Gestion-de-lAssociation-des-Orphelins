@@ -18,6 +18,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.Positive;
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,7 +42,7 @@ public class Activite {
     @Column(nullable = false)
     @NotNull(message = "La date est obligatoire")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
 
     @Column(nullable = false)
     @NotNull(message = "Le budget est obligatoire")
@@ -48,8 +50,8 @@ public class Activite {
     private double budget;
 
     @ManyToMany
-    @JoinTable(name = "activite_orphelin", joinColumns = @JoinColumn(name = "activite_id"),
-     inverseJoinColumns = @JoinColumn(name = "orphelin_id"))
+    @JoinTable(name = "activite_orphelin", joinColumns = @JoinColumn(name = "activite_id"), inverseJoinColumns = @JoinColumn(name = "orphelin_id"))
+    @Builder.Default
     private Set<Orphelin> participants = new HashSet<>();
 
 }

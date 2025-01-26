@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,5 +74,13 @@ public class DonService implements DonInterface {
     public Page<responseDon> getAllDonsPaginated(Pageable pageable) {
         return donRepository.findAll(pageable)
                 .map(donMapper::toResponse);
+    }
+
+    @Override
+    public List<responseDon> findByDateCreationBetween(LocalDate dateDebut, LocalDate dateFin) {
+        return donRepository.findByDateCreationBetween(dateDebut, dateFin)
+                .stream()
+                .map(donMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }

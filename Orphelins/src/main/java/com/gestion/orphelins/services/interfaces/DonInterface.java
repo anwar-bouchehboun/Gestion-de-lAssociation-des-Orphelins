@@ -2,6 +2,7 @@ package com.gestion.orphelins.services.interfaces;
 
 import com.gestion.orphelins.dto.request.requestDon;
 import com.gestion.orphelins.dto.response.responseDon;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,6 @@ public interface DonInterface {
     responseDon updateDon(Long id, requestDon request);
 
     void deleteDon(Long id);
-    
+
+    List<responseDon> findByDateCreationBetween(LocalDate dateDebut, LocalDate dateFin);
 }

@@ -8,7 +8,9 @@ import java.time.LocalDate;
 
 @Repository
 public interface DonRepository extends JpaRepository<Don, Long> {
-    List<Don> findByDate(LocalDate date);
+    List<Don> findByDateCreation(LocalDate dateCreation);
 
     List<Don> findByNomDonateurContaining(String nomDonateur);
+
+    List<Don> findByDateCreationBetween(LocalDate dateDebut, LocalDate dateFin);
 }

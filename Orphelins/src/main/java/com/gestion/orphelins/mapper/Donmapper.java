@@ -3,6 +3,7 @@ package com.gestion.orphelins.mapper;
 import com.gestion.orphelins.dto.request.requestDon;
 import com.gestion.orphelins.dto.response.responseDon;
 import com.gestion.orphelins.entity.Don;
+import com.gestion.orphelins.enums.Statut;
 import org.springframework.stereotype.Component;
 
 
@@ -15,7 +16,7 @@ public class Donmapper {
         .nomDonateur(request.getNomDonateur())
         .montant(request.getMontant())
         .objectif(request.getObjectif())
-        .date(request.getDate())
+        .statut(Statut.valueOf(request.getStatut()))
         .build();
        
         return don;
@@ -27,7 +28,9 @@ public class Donmapper {
         .nomDonateur(don.getNomDonateur())
         .montant(don.getMontant())
         .objectif(don.getObjectif())
-        .date(don.getDate())
+        .statut(don.getStatut())
+       .dateCreation(don.getDateCreation())
+        .dateModification(don.getDateModification())
         .build();
                
     }
