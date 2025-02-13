@@ -2,6 +2,7 @@ package com.gestion.orphelins.repository;
 
 import com.gestion.orphelins.entity.Don;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.time.LocalDate;
@@ -13,4 +14,7 @@ public interface DonRepository extends JpaRepository<Don, Long> {
     List<Don> findByNomDonateurContaining(String nomDonateur);
 
     List<Don> findByDateCreationBetween(LocalDate dateDebut, LocalDate dateFin);
+
+    @Query("SELECT SUM(d.montant) FROM Don d")
+    Double calculerMontantTotal();
 }
