@@ -78,7 +78,7 @@ public class RapportController {
         return ResponseEntity.ok(rapportService.genererRapportDon(donId));
     }
 
-    @GetMapping("/type/{type}")
+    @GetMapping("/type")
     public ResponseEntity<List<responseRapport>> getRapportsByType(
             @RequestParam(name = "type", required = true) String type) {
         return ResponseEntity.ok(rapportService.getRapportsByType(type));

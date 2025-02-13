@@ -25,6 +25,7 @@ public class Rapportmapper {
                 .contenu(rapport.getContenu())
                 .description(rapport.getDescription())
                 .date(rapport.getDate())
+                .dateModification(rapport.getDateModification())
                 .build();
     }
 }

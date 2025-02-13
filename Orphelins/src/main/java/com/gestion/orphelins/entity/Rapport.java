@@ -39,7 +39,9 @@ public class Rapport {
     @PastOrPresent(message = "La date ne peut pas être dans le futur")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
     @Column(nullable = true)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateModification;
     @PreUpdate
     protected void onUpdate() {

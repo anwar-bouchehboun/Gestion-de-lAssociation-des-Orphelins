@@ -31,4 +31,6 @@ public class requestRapport {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
+   
 }

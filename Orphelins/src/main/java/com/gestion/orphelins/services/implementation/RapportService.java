@@ -69,8 +69,10 @@ public class RapportService implements RapportInterface {
         rapport.setDescription(request.getDescription());
         rapport.setDate(request.getDate());
         rapport.setDateModification(LocalDate.now());
+        
 
         Rapport updatedRapport = rapportRepository.save(rapport);
+        System.out.println(updatedRapport.getDateModification());
         return rapportMapper.toResponse(updatedRapport);
     }
 
