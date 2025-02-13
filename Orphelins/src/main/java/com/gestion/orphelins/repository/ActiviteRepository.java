@@ -22,6 +22,9 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query("SELECT MONTH(a.date) as mois, COUNT(a) as count FROM Activite a GROUP BY MONTH(a.date)")
     List<Map<String, Object>> countActiviteParMois();
 
+    @Query("SELECT YEAR(a.date) as annee, COUNT(a) as count FROM Activite a GROUP BY YEAR(a.date)")
+    List<Map<String, Object>> countActiviteParAnnee();
+
     @Query("SELECT COALESCE(SUM(a.budget), 0) FROM Activite a")
     Double calculerMontantTotalActivites();
 
