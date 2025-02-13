@@ -49,7 +49,6 @@ Le projet suit une architecture en couches avec:
    - Responsive Design
    - Animation
    - Découpage en modules
-   
 
 2. **Backend**
    - Contrôleurs Spring
