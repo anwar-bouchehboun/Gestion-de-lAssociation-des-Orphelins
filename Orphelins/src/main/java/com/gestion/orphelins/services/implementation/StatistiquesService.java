@@ -47,6 +47,10 @@ public class StatistiquesService implements StatistiquesInterface {
             Double montantTotal = donRepository.calculerMontantTotal();
             statistiques.put("montantTotalDons", montantTotal != null ? montantTotal : 0.0);
 
+            // Ajout du montant total des activités
+            Double montantTotalActivites = activiteRepository.calculerMontantTotalActivites();
+            statistiques.put("montantTotalActivites", montantTotalActivites != null ? montantTotalActivites : 0.0);
+
             // Statistiques des orphelins par tuteur
             List<Map<String, Object>> orphelinsList = tuteurRepository.countOrphelinsParTuteur();
             Map<String, Long> orphelinsParTuteur = orphelinsList.stream()
