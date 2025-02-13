@@ -69,7 +69,6 @@ Le projet suit une architecture en couches avec:
    - Gestion des données avec PostgreSQL
    - Gestion des fichiers avec Spring Boot
    - Gestion des messages avec Spring Boot
-   - Gestion des messages avec Spring Boot
 
 ## 📦 Installation
 
