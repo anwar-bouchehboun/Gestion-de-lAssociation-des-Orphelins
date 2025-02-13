@@ -1,3 +1,5 @@
+# 👥 Gestion-de-l'Association-des-Orphelins
+
 # 🚀 Application Full Stack Angular & Spring Boot
 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
@@ -13,6 +15,7 @@ Cette application full stack combine un frontend Angular avec un backend Spring 
 ## 🛠 Technologies Utilisées
 
 ### Frontend
+
 - Angular 16+
 - TypeScript
 - Angular Material
@@ -20,6 +23,7 @@ Cette application full stack combine un frontend Angular avec un backend Spring 
 - NgRx (State Management)
 
 ### Backend
+
 - Spring Boot 3.x
 - Spring Security 6
 - Spring Data JPA
@@ -31,6 +35,7 @@ Cette application full stack combine un frontend Angular avec un backend Spring 
 Le projet suit une architecture en couches avec:
 
 1. **Frontend**
+
    - Composants Angular
    - Services API
    - Routes et navigation
@@ -67,17 +72,17 @@ cd Gestion-de-lAssociation-des-Orphelins
 
 2. **Configurer la base de données**
 
-    - Ouvrez le fichier `application.properties`
-    - Modifiez les paramètres de connexion à la base de données
+   - Ouvrez le fichier `application.properties`
+   - Modifiez les paramètres de connexion à la base de données
 
 3. **Exécuter le projet**
 
-    - Démarrez le serveur backend
-    - Démarrez le serveur frontend
+   - Démarrez le serveur backend
+   - Démarrez le serveur frontend
 
 4. **Accéder à l'application**
 
-    - Ouvrez votre navigateur et accédez à `http://localhost:4200`
+   - Ouvrez votre navigateur et accédez à `http://localhost:4200`
 
 ## 📚 Documentation
 
@@ -92,15 +97,33 @@ cd Gestion-de-lAssociation-des-Orphelins
 - [Spring Boot Actuator Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
 - [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
 
+## 🎯 Fonctionnalités Principales
 
+- 👤 Gestion des utilisateurs et des rôles
+- 👶 Gestion des orphelins
+- 🏠 Gestion des centres d'hébergement
+- 📝 Gestion des Activités
+- 💰 Gestion des dons et des donateurs
+- 📊 Tableaux de bord et statistiques
+- 📅 Gestion des Rapports
+- 📫 Système de notifications
 
+## 🔑 Prérequis
 
+- ☕ Java 8+
+- 📦 Maven 2.4+
+- 🗄️ PostgreSQL 13+
+- 🅰️ Angular CLI
+- 📦 Uml
 
+## 👥 Contribution
 
+Les contributions sont les bienvenues ! N'hésitez pas à :
 
+- 🐛 Signaler des bugs
+- 💡 Proposer des nouvelles fonctionnalités
+- 🔧 Soumettre des pull requests
 
+## 📄 Licence
 
-
-
-
-
+Ce projet est sous licence MIT - voir le fichier [LICENSE.md](LICENSE.md) pour plus de détails.
