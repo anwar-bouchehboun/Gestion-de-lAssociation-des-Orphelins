@@ -31,6 +31,16 @@ public class DonController {
         responseMap.put("message", "Don créé avec succès");
         return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
     }
+    @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/don/{id} path.
+    public ResponseEntity<Map<String, String>> updateDon(@Valid @PathVariable Long id,
+                                                         @RequestBody requestDon request) {
+        donInterface.updateDon(id, request);
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("status", "success");
+        responseMap.put("message", "Don mis à jour avec succès");
+        return ResponseEntity.ok(responseMap);
+    }
+
 
     @GetMapping("/{id}") // Maps HTTP GET requests to the /api/don/{id} path.
     public ResponseEntity<responseDon> getDonById(@Valid @PathVariable Long id) {
@@ -62,15 +72,6 @@ public class DonController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/don/{id} path.
-    public ResponseEntity<Map<String, String>> updateDon(@Valid @PathVariable Long id,
-            @RequestBody requestDon request) {
-        donInterface.updateDon(id, request);
-        Map<String, String> responseMap = new HashMap<>();
-        responseMap.put("status", "success");
-        responseMap.put("message", "Don mis à jour avec succès");
-        return ResponseEntity.ok(responseMap);
-    }
 
     @DeleteMapping("/{id}") // Maps HTTP DELETE requests to the /api/don/{id} path.
     public ResponseEntity<Map<String, String>> deleteDon(@Valid @PathVariable Long id) {

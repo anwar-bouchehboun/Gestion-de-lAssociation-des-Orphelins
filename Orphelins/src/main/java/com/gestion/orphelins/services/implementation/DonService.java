@@ -7,6 +7,7 @@ import com.gestion.orphelins.mapper.Donmapper;
 import com.gestion.orphelins.repository.DonRepository;
 import com.gestion.orphelins.services.interfaces.DonInterface;
 import com.gestion.orphelins.validation.NotFoundExceptionHndler;
+import com.gestion.orphelins.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,7 +57,9 @@ public class DonService implements DonInterface {
     public responseDon updateDon(Long id, requestDon request) {
         Don existingDon = donRepository.findById(id)
                 .orElseThrow(() -> new NotFoundExceptionHndler("Don non trouvé avec l'id: " + id));
-
+        if (request.getStatut() == null) {
+            throw new ValidationException("Le statut ne peut pas être null");
+        }
         Don updatedDon = donMapper.toEntity(request);
         updatedDon.setId(existingDon.getId());
         return donMapper.toResponse(donRepository.save(updatedDon));

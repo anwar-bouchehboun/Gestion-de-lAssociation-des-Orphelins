@@ -10,5 +10,7 @@ import java.util.List;
 public interface RapportRepository extends JpaRepository<Rapport, Long> {
     List<Rapport> findByDate(LocalDate date);
 
-    List<Rapport> findByType(String type);
+    List<Rapport> findByTypeContaining(String type);
+
+    List<Rapport> findByDateBetween(LocalDate dateDebut, LocalDate dateFin);
 }

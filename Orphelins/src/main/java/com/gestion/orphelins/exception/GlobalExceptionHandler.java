@@ -27,6 +27,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors()
                 .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+        errors.put("message", "Erreur de validation des arguments");
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
@@ -37,6 +38,7 @@ public class GlobalExceptionHandler {
                 "Erreur de validation des arguments: " + ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         errors.put("error", ex.getMessage());
+        errors.put("message", ex.getMessage());
         return ResponseEntity.badRequest().body(errors);
     }
 
