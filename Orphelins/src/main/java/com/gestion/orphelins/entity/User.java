@@ -50,5 +50,6 @@ public class User {
     private Roleenum role;
 
     @Column(nullable = false)
-    private boolean isActive = false;
+    @Builder.Default
+    private boolean isActive = true;
 }

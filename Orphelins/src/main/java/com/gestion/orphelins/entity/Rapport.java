@@ -26,7 +26,7 @@ public class Rapport {
     @NotBlank(message = "Le type est obligatoire")
     private String type;
 
-    @Column(nullable = false, length = 10000)
+    @Column(nullable = false, length = 100000)
     @NotBlank(message = "Le contenu ne peut pas être vide")
     private String contenu;
 
