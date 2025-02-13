@@ -40,6 +40,16 @@ Le projet suit une architecture en couches avec:
    - Services API
    - Routes et navigation
    - State Management avec NgRx
+   - Lazy Loading
+   - Pipes
+   - Guards
+   - Interceptors
+   - Formulaires
+   - Validations
+   - Responsive Design
+   - Animation
+   - Découpage en modules
+   
 
 2. **Backend**
    - Contrôleurs Spring
