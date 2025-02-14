@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import javax.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController // Marks this class as a RESTful controller.
 @RequestMapping("/api/don") // Maps all HTTP requests to this controller to the /api/don path.
@@ -24,6 +25,7 @@ public class DonController {
     private final DonInterface donInterface;
 
     @PostMapping // Maps HTTP POST requests to the /api/don path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<Map<String, String>> createDon(@Valid @RequestBody requestDon request) {
         donInterface.createDon(request);
         Map<String, String> responseMap = new HashMap<>();
@@ -32,6 +34,7 @@ public class DonController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
     }
     @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/don/{id} path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<Map<String, String>> updateDon(@Valid @PathVariable Long id,
                                                          @RequestBody requestDon request) {
         donInterface.updateDon(id, request);
@@ -43,30 +46,35 @@ public class DonController {
 
 
     @GetMapping("/{id}") // Maps HTTP GET requests to the /api/don/{id} path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<responseDon> getDonById(@Valid @PathVariable Long id) {
         responseDon response = donInterface.getDonById(id);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/nomDonateur/{nomDonateur}") // Maps HTTP GET requests to the /api/don/nomDonateur/{nomDonateur} path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE', 'ADMIN')")
     public ResponseEntity<responseDon> getDonByNomDonateur(@Valid @PathVariable String nomDonateur) {
         responseDon response = donInterface.getDonByNomDonateur(nomDonateur);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/search") // Maps HTTP GET requests to the /api/don/search path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE', 'ADMIN')")
     public ResponseEntity<responseDon> getByNomDonateur(@RequestParam String nomDonateur) {
         responseDon response = donInterface.getDonByNomDonateur(nomDonateur);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping // Maps HTTP GET requests to the /api/don path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE', 'ADMIN')")
     public ResponseEntity<List<responseDon>> getAllDons() {
         List<responseDon> response = donInterface.getAllDons();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/page") // Maps HTTP GET requests to the /api/don/page path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE', 'ADMIN')")
     public ResponseEntity<Page<responseDon>> getAllDonsPaginated(Pageable pageable) {
         Page<responseDon> response = donInterface.getAllDonsPaginated(pageable);
         return ResponseEntity.ok(response);
@@ -74,6 +82,7 @@ public class DonController {
 
 
     @DeleteMapping("/{id}") // Maps HTTP DELETE requests to the /api/don/{id} path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<Map<String, String>> deleteDon(@Valid @PathVariable Long id) {
         donInterface.deleteDon(id);
         Map<String, String> response = new HashMap<>();
@@ -83,6 +92,7 @@ public class DonController {
     }
 
     @GetMapping("/between")
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE', 'ADMIN')")
     public ResponseEntity<List<responseDon>> getDonsBetweenDates(
             @RequestParam LocalDate dateDebut,
             @RequestParam LocalDate dateFin) {

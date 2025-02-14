@@ -41,7 +41,6 @@ public class User {
     @Column(nullable = false)
     @NotBlank(message = "Le mot de passe est obligatoire")
     @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères")
-    @Pattern(regexp = "^[a-zA-Z0-9@]{8,}$", message = "Le mot de passe doit contenir des lettres, chiffres et peut inclure le caractère @")
     // "User#2023" , "Admin@123"
     private String motDePasse;
 

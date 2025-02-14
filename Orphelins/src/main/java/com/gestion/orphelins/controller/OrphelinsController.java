@@ -12,7 +12,7 @@ import com.gestion.orphelins.dto.response.responseOrphelin;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import javax.validation.Valid;
 
 @RestController // Marks this class as a RESTful controller.
@@ -23,6 +23,7 @@ public class OrphelinsController {
     private final OrphelinInterface orphelinInterface;
 
     @PostMapping // Maps HTTP POST requests to the /api/orphelins path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<Map<String, Object>> createOrphelin(
             @Valid @RequestBody requestOrphelin request) {
         responseOrphelin response = orphelinInterface.createOrphelin(request);
@@ -34,6 +35,7 @@ public class OrphelinsController {
     }
 
     @GetMapping // Maps HTTP GET requests to the /api/orphelins path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE','ADMIN','COLLABORATEUR')")
     public ResponseEntity<Map<String, Object>> getAllOrphelins() {
         List<responseOrphelin> response = orphelinInterface.getAllOrphelins();
         Map<String, Object> responseMap = new HashMap<>();
@@ -44,11 +46,13 @@ public class OrphelinsController {
     }
 
     @GetMapping("/page") // Maps HTTP GET requests to the /api/orphelins/page path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE','ADMIN','COLLABORATEUR')")
     public ResponseEntity<Page<responseOrphelin>> getAllOrphelinsPaginated(Pageable pageable) {
         return ResponseEntity.ok(orphelinInterface.getAllOrphelinsPaginated(pageable));
     }
 
     @GetMapping("/{id}") // Maps HTTP GET requests to the /api/orphelins/{id} path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE','ADMIN','COLLABORATEUR')")
     public ResponseEntity<Map<String, Object>> getOrphelinById(
             @Valid @PathVariable Long id) {
         responseOrphelin response = orphelinInterface.getOrphelinById(id);
@@ -60,6 +64,7 @@ public class OrphelinsController {
     }
 
     @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/orphelins/{id} path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<Map<String, Object>> updateOrphelin(
             @Valid @PathVariable Long id,
             @Valid @RequestBody requestOrphelin request) {
@@ -72,6 +77,7 @@ public class OrphelinsController {
     }
 
     @DeleteMapping("/{id}") // Maps HTTP DELETE requests to the /api/orphelins/{id} path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<Map<String, String>> deleteOrphelin(@Valid @PathVariable Long id) {
         orphelinInterface.deleteOrphelin(id);
         Map<String, String> response = new HashMap<>();
@@ -81,6 +87,7 @@ public class OrphelinsController {
     }
 
     @PostMapping("/create-all") // Maps HTTP POST requests to the /api/orphelins/create-all path.
+    @PreAuthorize("hasRole('GESTIONNAIRE')")
     public ResponseEntity<List<responseOrphelin>> saveAllOrphelins(
             @Valid @RequestBody List<requestOrphelin> requests) {
         return ResponseEntity.ok(orphelinInterface.saveAllOrphelins(requests));
@@ -88,6 +95,7 @@ public class OrphelinsController {
 
   
     @GetMapping("/search") // Maps HTTP GET requests to the /api/orphelins/search path.
+    @PreAuthorize("hasAnyRole('GESTIONNAIRE','ADMIN','COLLABORATEUR')")
     public ResponseEntity<List<responseOrphelin>> getByNomOrphelin(@RequestParam String nomOrphelin) {
         List<responseOrphelin> response = orphelinInterface.getAllOrphelinsByNom(nomOrphelin);
         return ResponseEntity.ok(response);

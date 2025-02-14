@@ -88,12 +88,12 @@ public class RapportService implements RapportInterface {
         Activite activite = activiteRepository.findById(activiteId)
                 .orElseThrow(() -> new NotFoundExceptionHndler("Activité non trouvée avec l'id: " + activiteId));
         String contenu = String.format(
-                "Rapport d'activité" +
-                        " Nom: %s" +
-                        " Date: %s" +
-                        " Budget: %s"+
-                        " Nombre de participants:  %s" +
-                        " Participants: %s",
+                "Rapport d'activité : " +
+                        " Nom: %s"  +
+                        " ,Date: %s" +
+                        " ,Budget: %s"+
+                        " ,Nombre de participants:  %s" +
+                        " ,Participants: %s",
                 activite.getNom(),
                 activite.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 activite.getBudget(),
