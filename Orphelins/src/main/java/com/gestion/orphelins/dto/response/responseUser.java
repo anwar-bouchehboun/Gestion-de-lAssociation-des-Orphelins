@@ -14,4 +14,5 @@ public class responseUser {
     private String nom;
     private String email;
     private String role;
+    private boolean isActive;
 }

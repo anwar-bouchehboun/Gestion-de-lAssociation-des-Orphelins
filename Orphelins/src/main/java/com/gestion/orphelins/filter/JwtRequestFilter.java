@@ -1,10 +1,12 @@
 package com.gestion.orphelins.filter;
 
 import com.gestion.orphelins.services.implementation.AuthenticationService;
+import com.gestion.orphelins.services.implementation.TokenBlacklistService;
 import com.gestion.orphelins.utilitaire.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +29,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Qualifier("AuthenticationService")
     private final AuthenticationService authenticationService;
 
+    private final TokenBlacklistService tokenBlacklist;
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -40,6 +45,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
+
+            if (tokenBlacklist.isTokenBlacklisted(token)) {
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.setContentType("application/json");
+                String jsonResponse = "{\"status\":\"UNAUTHORIZED\",\"message\":\"Token blacklisted. Veuillez vous reconnecter.\"}";
+                response.getWriter().write(jsonResponse);
+                return;
+            }
+
+
             try {
                 username = jwtUtil.extractSubject(token);
                 log.info("Token trouvé pour l'utilisateur: {}", username);

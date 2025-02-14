@@ -3,12 +3,14 @@ package com.gestion.orphelins.dto.request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.validation.constraints.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class requestUser {
+public class UserUpdateRequest {
+
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
@@ -16,13 +18,6 @@ public class requestUser {
     @Email(message = "Format d'email invalide")
     private String email;
 
-    @NotBlank(message = "Le mot de passe est obligatoire")
-    @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères")
-    // "User#2023" , "Admin@123"
-    private String motDePasse;
-
     @NotBlank(message = "Le rôle est obligatoire")
     private String role;
-
-    private boolean isActive= true;
 }

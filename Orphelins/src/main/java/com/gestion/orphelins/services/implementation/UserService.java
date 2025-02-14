@@ -11,15 +11,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.validation.ValidationException;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.gestion.orphelins.enums.Roleenum;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import java.util.Arrays;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import com.gestion.orphelins.dto.request.PasswordUpdateRequest;
+import com.gestion.orphelins.dto.request.UserUpdateRequest;
+import com.gestion.orphelins.validation.NotFoundExceptionHndler;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService implements UserInterface {
 
     private final UserRepository userRepository;
@@ -28,57 +33,15 @@ public class UserService implements UserInterface {
 
     @Override
     public responseUser createUser(requestUser request) {
+        // Vérifier si l'email existe déjà
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("L'email existe déjà");
+        }
+
         try {
-            // Validation des champs obligatoires
-            if (request.getNom() == null || request.getNom().trim().isEmpty()) {
-                throw new ValidationException("Le nom est obligatoire");
-            }
+            log.info("Création d'un utilisateur avec les informations suivantes: {}", request);
 
-            if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
-                throw new ValidationException("L'email est obligatoire");
-            }
-
-            if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
-                throw new ValidationException("Le mot de passe est obligatoire");
-            }
-
-            if (request.getRole() == null || request.getRole().trim().isEmpty()) {
-                throw new ValidationException("Le rôle est obligatoire");
-            }
-
-            // Validation du format de l'email
-            if (!request.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-                throw new ValidationException("Format d'email invalide");
-            }
-
-            // Vérification de l'existence de l'email
-            if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-                throw new ValidationException("L'email " + request.getEmail() + " existe déjà");
-            }
-
-            // Validation de la longueur du mot de passe
-            if (request.getPassword().length() < 8) {
-                throw new ValidationException("Le mot de passe doit contenir au moins 8 caractères");
-            }
-
-            // Validation du rôle
-            try {
-                Roleenum.valueOf(request.getRole().toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new ValidationException("Le rôle spécifié n'est pas valide. Les rôles valides sont : " +
-                        String.join(", ", Arrays.stream(Roleenum.values())
-                                .map(Enum::name)
-                                .collect(Collectors.toList())));
-            }
-
-            // Création de l'utilisateur
-            User user = User.builder()
-                    .nom(request.getNom())
-                    .email(request.getEmail())
-                    .motDePasse(passwordEncoder.encode(request.getPassword()))
-                    .role(Roleenum.valueOf(request.getRole().toUpperCase()))
-                    .isActive(true)
-                    .build();
+            User user = userMapper.toEntity(request);
 
             return userMapper.toResponse(userRepository.save(user));
         } catch (ValidationException e) {
@@ -91,13 +54,13 @@ public class UserService implements UserInterface {
     @Override
     public responseUser getUserById(Long id) {
         return userMapper.toResponse(userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur non trouvé")));
+                .orElseThrow(() -> new NotFoundExceptionHndler("Utilisateur non trouvé")));
     }
 
     @Override
     public responseUser getUserByEmail(String email) {
         return userMapper.toResponse(userRepository.findByEmail(email)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur non trouvé")));
+                .orElseThrow(() -> new NotFoundExceptionHndler("Utilisateur non trouvé")));
     }
 
     @Override
@@ -110,12 +73,12 @@ public class UserService implements UserInterface {
     @Override
     public responseUser updateUser(Long id, requestUser request) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Utilisateur non trouvé"));
+                .orElseThrow(() -> new NotFoundExceptionHndler("Utilisateur non trouvé"));
 
         user.setNom(request.getNom());
         user.setEmail(request.getEmail());
-        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
-            user.setMotDePasse(passwordEncoder.encode(request.getPassword()));
+        if (request.getMotDePasse() != null && !request.getMotDePasse().isEmpty()) {
+            user.setMotDePasse(passwordEncoder.encode(request.getMotDePasse()));
         }
         if (request.getRole() != null && !request.getRole().isEmpty()) {
             user.setRole(Roleenum.valueOf(request.getRole().toUpperCase()));
@@ -126,7 +89,33 @@ public class UserService implements UserInterface {
 
     @Override
     public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundExceptionHndler("Utilisateur non trouvé");
+        }
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<responseUser> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable).map(userMapper::toResponse);
+    }
+
+    @Override
+    public void updatePassword(Long id, PasswordUpdateRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundExceptionHndler("Utilisateur non trouvé"));
+        user.setMotDePasse(passwordEncoder.encode(request.getMotDePasse()));
+        userRepository.save(user);
+    }
+
+    @Override
+    public responseUser updateUser(Long id, UserUpdateRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundExceptionHndler("Utilisateur non trouvé"));
+        user.setNom(request.getNom());
+        user.setEmail(request.getEmail());
+        user.setRole(Roleenum.valueOf(request.getRole().toUpperCase()));
+        return userMapper.toResponse(userRepository.save(user));
     }
 
 }

@@ -7,6 +7,8 @@ import com.gestion.orphelins.enums.Roleenum;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
+import com.gestion.orphelins.dto.request.UserUpdateRequest;
+import com.gestion.orphelins.dto.request.PasswordUpdateRequest;
 
 @Component
 @RequiredArgsConstructor
@@ -18,10 +20,23 @@ public class Usermapper {
         return User.builder()
                 .nom(request.getNom())
                 .email(request.getEmail())
-                .motDePasse(passwordEncoder.encode(request.getPassword()))
+                .motDePasse(passwordEncoder.encode(request.getMotDePasse()))
+                .role(Roleenum.valueOf(request.getRole()))
+                .isActive(request.isActive())
+                .build();
+    }
+
+  
+
+    public User toEntityupdate(UserUpdateRequest request) {
+        return User.builder()
+                .nom(request.getNom())
+                .email(request.getEmail())
                 .role(Roleenum.valueOf(request.getRole()))
                 .build();
     }
+
+
 
     public responseUser toResponse(User user) {
         return responseUser.builder()
@@ -29,6 +44,7 @@ public class Usermapper {
                 .nom(user.getNom())
                 .email(user.getEmail())
                 .role(user.getRole().name())
+                .isActive(user.isActive())
                 .build();
     }
 }
