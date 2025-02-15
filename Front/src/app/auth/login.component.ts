@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -81,7 +81,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
                   <input
                     formControlName="password"
                     [type]="hidePassword ? 'password' : 'text'"
-                    placeholder="Votre mot de passe"
+                    placeholder="Votre mot de passe (8 caractères minimum)"
                     class="form-input"
                   />
                   <button
@@ -99,6 +99,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
                   class="error-text"
                 >
                   Le mot de passe est requis
+                </div>
+                <div
+                  *ngIf="loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched"
+                  class="error-text"
+                >
+                  Le mot de passe doit contenir au moins 8 caractères
                 </div>
               </div>
 
@@ -402,7 +408,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     `,
   ],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
   isLoading: boolean = false;
@@ -411,13 +417,16 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required, Validators.minLength(8)],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
+
+  ngOnInit() {}
 
   onSubmit(): void {
     if (this.loginForm.valid) {
@@ -427,16 +436,8 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
 
       this.authService.login(email, password).subscribe({
-        next: (response: any) => {
+        next: () => {
           this.isLoading = false;
-          // Rediriger vers la page d'accueil ou le tableau de bord
-          const arry = [
-            {
-              role: response.role,
-              token: response.token,
-            },
-          ];
-          console.log(arry);
         },
         error: (error) => {
           this.isLoading = false;

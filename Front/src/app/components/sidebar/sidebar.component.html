@@ -1,0 +1,42 @@
+<div
+  class="h-screen bg-gradient-to-b from-red-600 via-purple-600 to-blue-600 shadow-lg transition-all duration-300 ease-in-out"
+  [ngClass]="{ 'w-64': true, 'w-20': false }"
+>
+  <!-- Logo et Titre -->
+  <div class="flex justify-center items-center h-16 border-b border-white/10">
+    <mat-icon class="text-3xl text-white">favorite</mat-icon>
+    <span class="ml-2 text-lg font-semibold text-white">Gestion Orphelins</span>
+  </div>
+
+  <!-- Menu Items -->
+  <nav class="px-2 mt-4">
+    <div class="space-y-1">
+      @for (item of menuItems; track item.route) { @if
+      (isMenuItemVisible(item.roles)) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="bg-white/20 text-white"
+        class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-150 ease-in-out text-white/90 hover:bg-white/10 hover:text-white group"
+      >
+        <mat-icon class="mr-3 w-6 h-6 text-white/80 group-hover:text-white">
+          {{ item.icon }}
+        </mat-icon>
+        <span>{{ item.label }}</span>
+      </a>
+      } }
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <div
+    class="absolute bottom-0 p-4 w-full bg-gradient-to-r border-t border-blue-500/10 from-red-500/30 to-blue-500/30"
+  >
+    <div class="flex items-center space-x-2">
+      <mat-icon class="text-white/80">account_circle</mat-icon>
+      <div class="flex flex-col">
+        <span class="text-sm font-medium text-white">{{ userRole }}</span>
+        <span class="text-xs text-white/80">Connecté</span>
+      </div>
+    </div>
+  </div>
+</div>
