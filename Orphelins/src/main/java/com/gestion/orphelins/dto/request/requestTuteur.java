@@ -12,6 +12,9 @@ public class requestTuteur {
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
+    @NotBlank(message = "Le CIN est obligatoire")
+    private String cin;
+
     @Email(message = "Format d'email invalide")
     @NotBlank(message = "L'email est obligatoire")
     private String email;

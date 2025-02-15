@@ -18,6 +18,7 @@ public class Tuteurmapper {
     public Tuteur toEntity(requestTuteur request) {
         return Tuteur.builder()
                 .nom(request.getNom())
+                .cin(request.getCin())
                 .email(request.getEmail())
                 .telephone(request.getTelephone())
                 .relation(request.getRelation())
@@ -29,6 +30,7 @@ public class Tuteurmapper {
         return responseTuteur.builder()
                 .id(tuteur.getId())
                 .nom(tuteur.getNom())
+                .cin(tuteur.getCin())
                 .email(tuteur.getEmail())
                 .telephone(tuteur.getTelephone())
                 .relation(tuteur.getRelation())

@@ -13,6 +13,7 @@ import java.util.List;
 public class responseTuteur {
     private Long id;
     private String nom;
+    private String cin;
     private String email;
     private String telephone;
     private String relation;

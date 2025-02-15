@@ -118,4 +118,10 @@ public class UserService implements UserInterface {
         return userMapper.toResponse(userRepository.save(user));
     }
 
+    @Override
+    public List<responseUser> getAllUsersByNom(String nom) {
+        return userRepository.findByNomContainingIgnoreCase(nom.toUpperCase()).stream()
+                .map(userMapper::toResponse)
+                .collect(Collectors.toList());
+    }
 }

@@ -18,7 +18,7 @@ public class Usermapper {
 
     public User toEntity(requestUser request) {
         return User.builder()
-                .nom(request.getNom())
+                .nom(request.getNom().toUpperCase())
                 .email(request.getEmail())
                 .motDePasse(passwordEncoder.encode(request.getMotDePasse()))
                 .role(Roleenum.valueOf(request.getRole()))
@@ -30,7 +30,7 @@ public class Usermapper {
 
     public User toEntityupdate(UserUpdateRequest request) {
         return User.builder()
-                .nom(request.getNom())
+                .nom(request.getNom().toUpperCase())
                 .email(request.getEmail())
                 .role(Roleenum.valueOf(request.getRole()))
                 .build();

@@ -30,9 +30,16 @@ public class Tuteur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+
     @Column(nullable = false)
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
+
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Le CIN est obligatoire")
+    private String cin;
 
     @Column(nullable = false, unique = true)
     @Email(message = "Format d'email invalide")

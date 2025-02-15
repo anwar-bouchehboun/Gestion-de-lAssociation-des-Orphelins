@@ -115,4 +115,10 @@ public class UserController {
     public ResponseEntity<responseUser> updateUser(@PathVariable Long id, @RequestBody UserUpdateRequest request) {
         return ResponseEntity.ok(userInterface.updateUser(id, request));
     }
+
+    @GetMapping("/search")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getAllUsersByNom(@RequestParam String nom) {
+        return ResponseEntity.ok(userInterface.getAllUsersByNom(nom));
+    }
 }

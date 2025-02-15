@@ -27,4 +27,6 @@ public interface UserInterface {
     void updatePassword(Long id, PasswordUpdateRequest request);
 
     responseUser updateUser(Long id, UserUpdateRequest request);
+
+    List<responseUser> getAllUsersByNom(String nom);
 }
