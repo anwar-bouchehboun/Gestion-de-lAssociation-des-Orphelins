@@ -10,6 +10,7 @@ interface MenuItem {
   icon: string;
   route: string;
   roles: string[];
+  description?: string;
 }
 
 @Component({
@@ -27,58 +28,65 @@ export class SidebarComponent implements OnInit {
       icon: 'dashboard',
       route: '/dashboard',
       roles: ['ADMIN', 'GESTIONNAIRE', 'COLLABORATEUR'],
+      description: 'Vue générale du système',
     },
     {
       label: 'Gestion Utilisateurs',
       icon: 'people',
       route: '/users',
       roles: ['ADMIN'],
+      description: 'Gestion des utilisateurs (Admin uniquement)',
     },
     {
       label: 'Orphelins',
       icon: 'child_care',
       route: '/orphelins',
       roles: ['ADMIN', 'GESTIONNAIRE', 'COLLABORATEUR'],
+      description: 'Gestion des orphelins',
     },
     {
       label: 'Tuteurs',
       icon: 'supervisor_account',
       route: '/tuteurs',
-      roles: ['ADMIN', 'GESTIONNAIRE'],
+      roles: ['ADMIN'],
+      description: 'Gestion des tuteurs (Admin uniquement)',
     },
     {
       label: 'Activités',
       icon: 'event',
       route: '/activites',
       roles: ['ADMIN', 'GESTIONNAIRE', 'COLLABORATEUR'],
+      description: 'Gestion des activités',
     },
     {
       label: 'Dons',
       icon: 'volunteer_activism',
       route: '/dons',
       roles: ['ADMIN', 'GESTIONNAIRE'],
+      description: 'Gestion des dons',
     },
     {
       label: 'Rapports',
       icon: 'assessment',
       route: '/rapports',
       roles: ['ADMIN', 'GESTIONNAIRE'],
+      description: 'Gestion des rapports',
     },
     {
       label: 'Statistiques',
       icon: 'bar_chart',
       route: '/statistiques',
       roles: ['ADMIN'],
+      description: 'Statistiques du système (Admin uniquement)',
     },
   ];
 
   constructor(private authService: AuthService) {
     this.userRole = this.authService.getUserRole() || '';
-    console.log('Role actuel:', this.userRole); // Pour le débogage
+    console.log('Role actuel:', this.userRole);
   }
 
   ngOnInit(): void {
-    // Vérifier si le rôle est défini
     if (!this.userRole) {
       this.userRole = this.authService.getUserRole() || '';
       console.log('Role après init:', this.userRole);
@@ -86,12 +94,8 @@ export class SidebarComponent implements OnInit {
   }
 
   isMenuItemVisible(roles: string[]): boolean {
-    console.log(
-      'Vérification pour les rôles:',
-      roles,
-      'Role utilisateur:',
-      this.userRole
-    );
-    return roles.includes(this.userRole);
+    if (!this.userRole) return false;
+    const userRoleUpper = this.userRole.toUpperCase();
+    return roles.includes(userRoleUpper);
   }
 }

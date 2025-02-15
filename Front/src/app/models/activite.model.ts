@@ -1,8 +1,9 @@
+import { Orphelin } from './orphelin.model';
 export interface Activite {
   id?: number;
   nom: string;
   description: string;
-  date: Date;
+  date: string;
   budget: number;
-  participantsIds: number[];
+  participants: Orphelin[];
 }

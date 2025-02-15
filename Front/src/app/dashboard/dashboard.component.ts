@@ -5,64 +5,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { SidebarComponent } from '../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    SidebarComponent,
-  ],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
   template: `
     <div class="dashboard-layout">
-      <!-- Sidebar Mobile Toggle -->
-      <button
-        (click)="toggleSidebar()"
-        class="fixed top-4 left-4 z-50 p-2 text-white bg-gradient-to-r from-red-600 to-blue-600 rounded-lg shadow-lg md:hidden hover:opacity-90"
-      >
-        <mat-icon>{{ isSidebarOpen ? 'close' : 'menu' }}</mat-icon>
-      </button>
-
-      <!-- Sidebar -->
-      <app-sidebar
-        [ngClass]="{ open: isSidebarOpen }"
-        class="sidebar"
-      ></app-sidebar>
-
       <!-- Main Content -->
       <div
         class="bg-gradient-to-br from-red-200 via-white to-blue-600 main-content"
       >
-        <!-- Header -->
-        <header class="header">
-          <div
-            class="flex justify-between items-center p-4 bg-gradient-to-r from-red-600 to-blue-600"
-          >
-            <h1 class="ml-12 text-xl font-bold text-white md:ml-0">
-              Tableau de Bord
-            </h1>
-            <div class="flex items-center space-x-4">
-              <div class="flex flex-col items-end">
-                <span class="text-sm font-medium text-white">{{
-                  username
-                }}</span>
-                <span class="text-xs text-white/80">{{ userRole }}</span>
-              </div>
-              <button
-                mat-icon-button
-                (click)="logout()"
-                class="p-2 text-white rounded-full transition-all duration-200 transform bg-white/20 hover:bg-white/30 hover:scale-105"
-              >
-                <mat-icon>logout</mat-icon>
-              </button>
-            </div>
-          </div>
-        </header>
-
         <!-- Dashboard Content -->
         <main class="p-6 dashboard-content">
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -117,9 +70,7 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
                 <div class="relative z-10">
                   <div class="flex justify-between items-start">
                     <div>
-                      <p class="text-sm font-medium text-white">
-                        Dons ce mois
-                      </p>
+                      <p class="text-sm font-medium text-white">Dons ce mois</p>
                       <p class="mt-2 text-3xl font-bold text-white">25</p>
                     </div>
                     <div
@@ -161,6 +112,8 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
                 ></div>
               </div>
             </mat-card>
+
+          
           </div>
         </main>
       </div>
@@ -266,17 +219,5 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // Vérifier si l'utilisateur est connecté et a un rôle
-    if (!this.userRole) {
-      this.router.navigate(['/login']);
-    }
-  }
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
   }
 }

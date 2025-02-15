@@ -1,1 +1,44 @@
-<router-outlet />
+<div class="dashboard-layout">
+  <!-- Sidebar Mobile Toggle -->
+  <button
+    *ngIf="authService.isLoggedIn()"
+    (click)="toggleSidebar()"
+    class="mobile-toggle"
+    [ngClass]="{ open: isSidebarOpen }"
+  >
+    <mat-icon>{{ isSidebarOpen ? "close" : "menu" }}</mat-icon>
+  </button>
+
+  <!-- Sidebar -->
+  <app-sidebar
+    *ngIf="authService.isLoggedIn()"
+    [ngClass]="{ open: isSidebarOpen }"
+    class="sidebar"
+  ></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="main-content" [ngClass]="{ 'with-sidebar': isSidebarOpen }">
+    <!-- Header -->
+    <header *ngIf="authService.isLoggedIn()" class="header">
+      <div class="header-content">
+        <h1 class="page-title">
+          {{ router.url === "/dashboard" ? "Tableau de Bord" : "" }}
+        </h1>
+        <div class="user-info">
+          <div class="user-details">
+            <span class="username">{{ username }}</span>
+            <span class="role">{{ userRole }}</span>
+          </div>
+          <button (click)="logout()" class="logout-btn">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dynamic Content -->
+    <div class="content-area">
+      <router-outlet />
+    </div>
+  </div>
+</div>
