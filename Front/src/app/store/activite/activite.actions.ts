@@ -78,7 +78,12 @@ export const setPage = createAction(
 
 export const loadActivitesPage = createAction(
   '[Activite] Load Activites Page',
-  props<{ page: number; pageSize: number }>()
+  props<{
+    page: number;
+    pageSize: number;
+    sortBy?: string;
+    desc?: boolean;
+  }>()
 );
 
 export const loadActivitesPageSuccess = createAction(

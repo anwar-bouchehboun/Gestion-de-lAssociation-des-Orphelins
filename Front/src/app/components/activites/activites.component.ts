@@ -34,7 +34,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActiviteState } from '../../store/activite/activite.reducer';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-activites',
   standalone: true,
@@ -94,7 +94,7 @@ import { ActiviteState } from '../../store/activite/activite.reducer';
               matInput
               [(ngModel)]="searchTerm"
               (keyup)="applyFilter($event)"
-              placeholder="Nom, description, date..."
+              placeholder="Nom, description..."
               #input
               class="py-1 text-white"
             />
@@ -137,10 +137,10 @@ import { ActiviteState } from '../../store/activite/activite.reducer';
 
         @if (loading$ | async) {
         <div
-          class="flex flex-col col-span-full gap-4 justify-center items-center p-8 bg-white/10 rounded-xl backdrop-blur-md"
+          class="flex flex-col col-span-full gap-4 justify-center items-center p-8 rounded-xl backdrop-blur-md bg-white/10"
         >
           <div
-            class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"
+            class="w-16 h-16 rounded-full border-4 border-indigo-500 animate-spin border-t-transparent"
           ></div>
           <p class="text-xl font-semibold text-white animate-pulse">
             Chargement des activités...
@@ -390,9 +390,14 @@ export class ActivitesComponent implements OnInit, OnDestroy {
   pageSize$ = this.store.select((state) => state.activite.pageSize);
   currentPage$ = this.store.select((state) => state.activite.currentPage);
   totalElements$ = this.store.select((state) => state.activite.totalElements);
-  filteredActivites$ = this.store.select(
-    ActiviteSelectors.selectFilteredActivites
-  );
+  filteredActivites$ = this.store
+    .select(ActiviteSelectors.selectFilteredActivites)
+    .pipe(
+      map((activites) => {
+        if (!activites) return [];
+        return [...activites];
+      })
+    );
 
   constructor(
     private store: Store<{ activite: ActiviteState }>,
@@ -420,6 +425,8 @@ export class ActivitesComponent implements OnInit, OnDestroy {
       ActiviteActions.loadActivitesPage({
         page: 0,
         pageSize: 6,
+        sortBy: 'id',
+        desc: true,
       })
     );
   }
@@ -429,6 +436,8 @@ export class ActivitesComponent implements OnInit, OnDestroy {
       ActiviteActions.loadActivitesPage({
         page: event.pageIndex,
         pageSize: event.pageSize,
+        sortBy: 'id',
+        desc: true,
       })
     );
   }
@@ -442,9 +451,19 @@ export class ActivitesComponent implements OnInit, OnDestroy {
   }
 
   deleteActivite(activite: Activite): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette activité ?')) {
-      this.store.dispatch(ActiviteActions.deleteActivite({ id: activite.id! }));
-    }
+    Swal.fire({
+      title: 'Suppression',
+      text: 'Êtes-vous sûr de vouloir supprimer cette activité ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(
+          ActiviteActions.deleteActivite({ id: activite.id! })
+        );
+      }
+    });
   }
 
   private showNotification(message: string, type: 'success' | 'error'): void {

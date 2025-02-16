@@ -31,10 +31,26 @@ export class ActiviteService {
   }
 
   // Récupérer les activités avec pagination
-  getActivitesPaginated(page: number, size: number): Observable<Activite[]> {
-    return this.http.get<Activite[]>(
-      `${this.apiUrl}/page?page=${page}&size=${size}`
-    );
+  getActivitesPaginated(
+    page: number,
+    size: number,
+    sortBy: string = 'id',
+    desc: boolean = true
+  ): Observable<Activite[]> {
+    const params = {
+      page: page.toString(),
+      size: size.toString(),
+      sort: sortBy,
+      desc: desc.toString(),
+    };
+
+    return this.http
+      .get<Activite[]>(`${this.apiUrl}/page`, { params })
+      .pipe(
+        tap((response) =>
+          console.log('Réponse API avec tri:', { params, response })
+        )
+      );
   }
 
   // Récupérer une activité par son ID

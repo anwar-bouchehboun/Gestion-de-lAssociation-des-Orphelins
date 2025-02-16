@@ -30,6 +30,7 @@ export class ActiviteEffects {
       ofType(ActiviteActions.createActivite),
       mergeMap(({ activite }) =>
         this.activiteService.createActivite(activite).pipe(
+          delay(1000),
           tap((newActivite) => console.log('newActivite Effecte', newActivite)),
           map((newActivite) =>
             ActiviteActions.createActiviteSuccess({ activite: newActivite })
@@ -55,6 +56,7 @@ export class ActiviteEffects {
       ofType(ActiviteActions.updateActivite),
       mergeMap(({ id, activite }) =>
         this.activiteService.updateActivite(id, activite).pipe(
+          delay(1000),
           map((updatedActivite) =>
             ActiviteActions.updateActiviteSuccess({ activite: updatedActivite })
           ),
@@ -79,6 +81,7 @@ export class ActiviteEffects {
       ofType(ActiviteActions.deleteActivite),
       mergeMap(({ id }) =>
         this.activiteService.deleteActivite(id).pipe(
+          delay(1000),
           map(() => ActiviteActions.deleteActiviteSuccess({ id })),
           tap(() => {
             this.snackBar.open('Activité supprimée avec succès', 'Fermer', {
@@ -114,21 +117,24 @@ export class ActiviteEffects {
   loadActivitesPage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ActiviteActions.loadActivitesPage),
-      mergeMap(({ page, pageSize }) =>
-        this.activiteService.getActivitesPaginated(page, pageSize).pipe(
-          delay(2000),
-          map((response: any) => {
-            return ActiviteActions.loadActivitesPageSuccess({
-              activites: response.content,
-              totalElements: response.totalElements,
-              pageSize: response.size,
-              currentPage: response.number,
-            });
-          }),
-          catchError((error) =>
-            of(ActiviteActions.loadActivitesPageFailure({ error }))
+      mergeMap(({ page, pageSize, sortBy = 'id', desc = true }) =>
+        this.activiteService
+          .getActivitesPaginated(page, pageSize, sortBy, desc)
+          .pipe(
+            tap((response) => console.log('response effect ', response)),
+            delay(2000),
+            map((response: any) => {
+              return ActiviteActions.loadActivitesPageSuccess({
+                activites: response.content,
+                totalElements: response.totalElements,
+                pageSize: response.size,
+                currentPage: response.number,
+              });
+            }),
+            catchError((error) =>
+              of(ActiviteActions.loadActivitesPageFailure({ error }))
+            )
           )
-        )
       )
     )
   );

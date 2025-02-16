@@ -5,6 +5,8 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +24,8 @@ import * as OrphelinSelectors from '../../store/orphelin/orphelin.selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { Orphelin } from '../../models/orphelin.model';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-activite-form',
@@ -146,6 +150,11 @@ import { Orphelin } from '../../models/orphelin.model';
                       class="text-indigo-600"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
+                    <mat-error
+                      *ngIf="activiteForm.get('date')?.errors?.['futureDate']"
+                    >
+                      La date doit être dans le futur
+                    </mat-error>
                   </mat-form-field>
                 </div>
 
@@ -251,6 +260,15 @@ export class ActiviteFormComponent implements OnInit, OnDestroy {
   orphelins$: Observable<Orphelin[]>;
   loading$ = this.store.select(ActiviteSelectors.selectActivitesLoading);
 
+  // Validateur personnalisé pour vérifier que la date est dans le futur
+  futureDateValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedDate = new Date(control.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return selectedDate >= today ? null : { futureDate: true };
+  }
+
   constructor(
     private fb: FormBuilder,
     private store: Store,
@@ -260,7 +278,7 @@ export class ActiviteFormComponent implements OnInit, OnDestroy {
     this.activiteForm = this.fb.group({
       nom: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      date: ['', Validators.required],
+      date: ['', [Validators.required, this.futureDateValidator.bind(this)]],
       budget: ['', [Validators.required, Validators.min(0)]],
       participantsid: [[], Validators.required],
     });
@@ -327,12 +345,29 @@ export class ActiviteFormComponent implements OnInit, OnDestroy {
 
       // Attendre 1.5 secondes avant de naviguer
       setTimeout(() => {
+        Swal.fire({
+          title: 'Activité ' + (this.isEditMode ? 'modifiée' : 'créée') + ' avec succès',
+          icon: 'success',
+          timer: 1500,
+        });
         this.router.navigate(['/activites']);
       }, 1500);
     }
   }
 
   onCancel(): void {
+    Swal.fire({
+      title: 'Annulation',
+      text: 'Voulez-vous vraiment annuler ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/activites']);
+      }
+    });
+
     this.router.navigate(['/activites']);
   }
 
