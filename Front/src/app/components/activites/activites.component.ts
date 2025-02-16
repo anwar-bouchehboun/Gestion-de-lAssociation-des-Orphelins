@@ -137,14 +137,16 @@ import { ActiviteState } from '../../store/activite/activite.reducer';
 
         @if (loading$ | async) {
         <div
-          class="flex flex-col col-span-full gap-4 justify-center items-center p-8"
+          class="flex flex-col col-span-full gap-4 justify-center items-center p-8 bg-white/10 rounded-xl backdrop-blur-md"
         >
-          <mat-spinner diameter="60"></mat-spinner>
+          <div
+            class="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"
+          ></div>
           <p class="text-xl font-semibold text-white animate-pulse">
-            Chargement des activités en cours...
+            Chargement des activités...
           </p>
-          <p class="text-sm text-white opacity-75">
-            Veuillez patienter quelques secondes
+          <p class="text-sm text-white/75">
+            Veuillez patienter pendant le chargement des données
           </p>
         </div>
         } @else { @for (activite of filteredActivites$ | async; track
@@ -204,7 +206,7 @@ import { ActiviteState } from '../../store/activite/activite.reducer';
                     >Participants</span
                   >
                   <span class="text-2xl font-bold text-gray-800">{{
-                    activite.participants.length
+                    (activite.participants || []).length
                   }}</span>
                 </div>
               </div>
@@ -219,7 +221,7 @@ import { ActiviteState } from '../../store/activite/activite.reducer';
                 Tous les Participants
               </h4>
               <div class="grid grid-cols-2 gap-2">
-                @for (participant of activite.participants; track
+                @for (participant of activite.participants || []; track
                 participant.id) {
                 <div
                   class="flex gap-2 items-center px-3 py-2 bg-gradient-to-r from-red-50 to-blue-50 rounded-xl"

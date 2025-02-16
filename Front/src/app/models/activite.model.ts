@@ -6,4 +6,5 @@ export interface Activite {
   date: string;
   budget: number;
   participants: Orphelin[];
+  participantsIds: number[];
 }

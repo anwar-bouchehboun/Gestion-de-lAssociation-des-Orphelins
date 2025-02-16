@@ -30,6 +30,7 @@ export class ActiviteEffects {
       ofType(ActiviteActions.createActivite),
       mergeMap(({ activite }) =>
         this.activiteService.createActivite(activite).pipe(
+          tap((newActivite) => console.log('newActivite Effecte', newActivite)),
           map((newActivite) =>
             ActiviteActions.createActiviteSuccess({ activite: newActivite })
           ),

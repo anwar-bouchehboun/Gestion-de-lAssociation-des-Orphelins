@@ -8,13 +8,15 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { activiteReducer } from './store/activite/activite.reducer';
 import { ActiviteEffects } from './store/activite/activite.effects';
+import { orphelinReducer } from './store/orphelin/orphelin.reducer';
+import { OrphelinEffects } from './store/orphelin/orphelin.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withInterceptors([requestInterceptor])),
-    provideStore({ activite: activiteReducer }),
-    provideEffects([ActiviteEffects]),
+    provideStore({ activite: activiteReducer, orphelin: orphelinReducer }),
+    provideEffects([ActiviteEffects, OrphelinEffects]),
   ],
 };
