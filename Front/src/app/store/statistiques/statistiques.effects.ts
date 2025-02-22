@@ -7,6 +7,7 @@ import {
   loadStatistiquesFailure,
 } from './statistiques.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable()
 export class StatistiquesEffects {
@@ -20,6 +21,7 @@ export class StatistiquesEffects {
       ofType(loadStatistiques),
       mergeMap(() =>
         this.statistiquesService.getStatistiquesGlobales().pipe(
+          delay(1500),
           tap((statistiques) => console.log('statistiques', statistiques)),
           map((statistiques) => loadStatistiquesSuccess({ statistiques })),
           catchError((error) => of(loadStatistiquesFailure({ error })))
