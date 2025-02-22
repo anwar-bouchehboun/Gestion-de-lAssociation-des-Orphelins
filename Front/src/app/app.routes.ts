@@ -5,6 +5,8 @@ import { loginGuard } from './guard/login.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ActivitesComponent } from './components/activites/activites.component';
 import { RoleGuard } from './guard/role.guard';
+import { OrphelinsListComponent } from './components/orphelins/orphelins-list/orphelins-list.component';
+import { StatistiquesComponent } from './components/statistiques/statistiques.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +32,12 @@ export const routes: Routes = [
     component: NotFoundComponent,
   },
   {
+    path: 'orphelins',
+    component: OrphelinsListComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['ADMIN', 'GESTIONNAIRE', 'COLLABORATEUR'] },
+  },
+  {
     path: 'activites',
     component: ActivitesComponent,
     canActivate: [RoleGuard],
@@ -52,6 +60,12 @@ export const routes: Routes = [
       ),
     canActivate: [RoleGuard],
     data: { roles: ['ADMIN', 'GESTIONNAIRE'] },
+  },
+  {
+    path: 'statistiques',
+    component: StatistiquesComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['ADMIN'] },
   },
   {
     path: '**',

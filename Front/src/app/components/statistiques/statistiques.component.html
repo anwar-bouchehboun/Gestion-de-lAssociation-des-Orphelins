@@ -1,0 +1,101 @@
+<div
+  class="p-6 min-h-screen bg-gradient-to-br from-red-600 via-purple-600 to-blue-600 rounded-lg shadow-md"
+>
+  <div class="mb-8 animate-fadeIn">
+    <div
+      class="inline-block p-2 mb-4 rounded-2xl shadow-lg backdrop-blur-md bg-white/90"
+    >
+      <div
+        class="px-6 py-3 bg-gradient-to-r from-red-500 to-blue-500 rounded-xl"
+      >
+        <h1
+          class="flex gap-3 items-center text-3xl font-bold tracking-wider text-white uppercase"
+        >
+          <mat-icon class="transform rotate-12">bar_chart</mat-icon>
+          STATISTIQUES
+        </h1>
+      </div>
+    </div>
+    <p class="ml-4 text-lg font-medium tracking-wider text-white uppercase">
+      Statistiques du système
+    </p>
+  </div>
+
+  <!-- Affichage des totaux -->
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Total Activités</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.totalActivites }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Total Dons</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.totalDons }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Total Orphelins</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.totalOrphelins }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Total Tuteurs</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.totalTuteurs }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Montant Total Activités</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.montantTotalActivites }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Montant Total Dons</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.montantTotalDons }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Orphelins Hommes</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.orphelinsHommes }}
+        </ng-container>
+      </p>
+    </div>
+    <div class="p-4 bg-white rounded border shadow">
+      <h2 class="font-semibold text-blue-800">Orphelins Femmes</h2>
+      <p class="font-semibold text-red-800">
+        <ng-container *ngIf="statistiques$ | async as statistiques">
+          {{ statistiques.orphelinsFemmes }}
+        </ng-container>
+      </p>
+    </div>
+  </div>
+
+  <!-- Ajout des graphiques -->
+  <div class="flex flex-col gap-4 p-4 mt-6 bg-white rounded-lg md:flex-row">
+    <div class="w-full h-64">
+      <canvas id="activitesChart"></canvas>
+    </div>
+    <div class="w-full h-64">
+      <canvas id="orphelinsChart"></canvas>
+    </div>
+  </div>
+</div>

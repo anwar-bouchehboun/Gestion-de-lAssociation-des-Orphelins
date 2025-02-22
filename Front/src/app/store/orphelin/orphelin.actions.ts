@@ -67,3 +67,36 @@ export const searchOrphelinsFailure = createAction(
   '[Orphelin] Search Orphelins Failure',
   props<{ error: any }>()
 );
+
+// Load Paginated Orphelins
+export const loadOrphelinsPaginated = createAction(
+  '[Orphelin] Load Orphelins Paginated',
+  props<{ page: number; size: number }>()
+);
+
+export const loadOrphelinsPaginatedSuccess = createAction(
+  '[Orphelin] Load Orphelins Paginated Success',
+  props<{
+    items: Orphelin[];
+    totalElements: number;
+    currentPage: number;
+    pageSize: number;
+  }>()
+);
+
+export const loadOrphelinsPaginatedFailure = createAction(
+  '[Orphelin] Load Orphelins Paginated Failure',
+  props<{ error: any }>()
+);
+
+// Set Page
+export const setCurrentPage = createAction(
+  '[Orphelin] Set Current Page',
+  props<{ page: number }>()
+);
+
+// Set Page Size
+export const setPageSize = createAction(
+  '[Orphelin] Set Page Size',
+  props<{ size: number }>()
+);

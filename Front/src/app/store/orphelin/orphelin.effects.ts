@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { map, mergeMap, catchError, switchMap, tap, delay } from 'rxjs/operators';
 import * as OrphelinActions from './orphelin.actions';
 import { OrphelinService } from '../../services/orphelin.service';
 
@@ -84,6 +84,29 @@ export class OrphelinEffects {
           ),
           catchError((error) =>
             of(OrphelinActions.searchOrphelinsFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  loadOrphelinsPaginated$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OrphelinActions.loadOrphelinsPaginated),
+      mergeMap(({ page, size }) =>
+        this.orphelinService.getAllOrphelinsPaginated(page, size).pipe(
+          delay(2000),
+          tap((response) => console.log('Réponse API orphelins paginés effecte:', response)),
+          map((response) =>
+            OrphelinActions.loadOrphelinsPaginatedSuccess({
+              items: response.content,
+              totalElements: response.totalElements,
+              currentPage: response.number,
+              pageSize: response.size,
+            })
+          ),
+          catchError((error) =>
+            of(OrphelinActions.loadOrphelinsPaginatedFailure({ error }))
           )
         )
       )

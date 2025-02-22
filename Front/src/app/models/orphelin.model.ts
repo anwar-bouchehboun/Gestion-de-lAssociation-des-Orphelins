@@ -6,4 +6,7 @@ export interface Orphelin {
   etatDeSante: string;
   niveauEducation: string;
   tuteurId: number;
+  relation: string;
+  nomTuteur: string;
 }
+  

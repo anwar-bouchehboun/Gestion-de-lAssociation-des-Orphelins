@@ -348,7 +348,7 @@ export class ActiviteFormComponent implements OnInit, OnDestroy {
         Swal.fire({
           title: 'Activité ' + (this.isEditMode ? 'modifiée' : 'créée') + ' avec succès',
           icon: 'success',
-          timer: 1500,
+          timer: 100,
         });
         this.router.navigate(['/activites']);
       }, 1500);
@@ -367,8 +367,6 @@ export class ActiviteFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['/activites']);
       }
     });
-
-    this.router.navigate(['/activites']);
   }
 
   ngOnDestroy(): void {

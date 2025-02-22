@@ -10,13 +10,20 @@ import { activiteReducer } from './store/activite/activite.reducer';
 import { ActiviteEffects } from './store/activite/activite.effects';
 import { orphelinReducer } from './store/orphelin/orphelin.reducer';
 import { OrphelinEffects } from './store/orphelin/orphelin.effects';
+import { statistiquesReducer } from './store/statistiques/statistiques.reducer';
+import { StatistiquesEffects } from './store/statistiques/statistiques.effects';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(withInterceptors([requestInterceptor])),
-    provideStore({ activite: activiteReducer, orphelin: orphelinReducer }),
-    provideEffects([ActiviteEffects, OrphelinEffects]),
+    provideStore({
+      activite: activiteReducer,
+      orphelin: orphelinReducer,
+      statistiques: statistiquesReducer,
+    }),
+    provideEffects([ActiviteEffects, OrphelinEffects, StatistiquesEffects]),
   ],
 };

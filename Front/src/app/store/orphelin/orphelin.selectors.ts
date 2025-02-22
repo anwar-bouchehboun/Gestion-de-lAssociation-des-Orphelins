@@ -4,6 +4,12 @@ import { OrphelinState } from './orphelin.reducer';
 export const selectOrphelinState =
   createFeatureSelector<OrphelinState>('orphelin');
 
+export const selectMainOrphelins = createSelector(
+  selectOrphelinState,
+  (state: OrphelinState) => state.mainOrphelins
+);
+
+
 export const selectAllOrphelins = createSelector(
   selectOrphelinState,
   (state: OrphelinState) => state.orphelins

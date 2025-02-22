@@ -3,12 +3,24 @@ import { Orphelin } from '../../models/orphelin.model';
 import * as OrphelinActions from './orphelin.actions';
 
 export interface OrphelinState {
+  mainOrphelins: {
+    items: Orphelin[];
+    totalElements: number;
+    currentPage: number;
+    pageSize: number;
+  };
   orphelins: Orphelin[];
   loading: boolean;
   error: any;
 }
 
 export const initialState: OrphelinState = {
+  mainOrphelins: {
+    items: [],
+    totalElements: 0,
+    currentPage: 0,
+    pageSize: 6,
+  },
   orphelins: [],
   loading: false,
   error: null,
@@ -98,5 +110,50 @@ export const orphelinReducer = createReducer(
     ...state,
     error,
     loading: false,
+  })),
+
+  // Load Paginated Orphelins
+  on(OrphelinActions.loadOrphelinsPaginated, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+
+  on(
+    OrphelinActions.loadOrphelinsPaginatedSuccess,
+    (state, { items, totalElements, currentPage, pageSize }) => ({
+      ...state,
+      mainOrphelins: {
+        items,
+        totalElements,
+        currentPage,
+        pageSize,
+      },
+      loading: false,
+    })
+  ),
+
+  on(OrphelinActions.loadOrphelinsPaginatedFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+
+  // Set Current Page
+  on(OrphelinActions.setCurrentPage, (state, { page }) => ({
+    ...state,
+    mainOrphelins: {
+      ...state.mainOrphelins,
+      currentPage: page,
+    },
+  })),
+
+  // Set Page Size
+  on(OrphelinActions.setPageSize, (state, { size }) => ({
+    ...state,
+    mainOrphelins: {
+      ...state.mainOrphelins,
+      pageSize: size,
+    },
   }))
 );
