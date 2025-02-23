@@ -23,7 +23,7 @@ public class TuteurController {
     private final TuteurInterface tuteurInterface;
 
     @PostMapping // Maps HTTP POST requests to the /api/tuteur path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<Map<String, Object>> createTuteur(@Valid @RequestBody requestTuteur request) {
         responseTuteur response = tuteurInterface.createTuteur(request);
         Map<String, Object> responseMap = new HashMap<>();
@@ -34,42 +34,42 @@ public class TuteurController {
     }
 
     @PostMapping("/multiple") // Maps HTTP POST requests to the /api/tuteur/multiple path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<List<responseTuteur>> createMultipleTuteurs(@RequestBody List<requestTuteur> requests) {
         List<responseTuteur> responses = tuteurInterface.createMultipleTuteurs(requests);
         return ResponseEntity.status(HttpStatus.CREATED).body(responses);
     }
 
     @GetMapping("/{id}") // Maps HTTP GET requests to the /api/tuteur/{id} path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<responseTuteur> getTuteurById(@Valid @PathVariable Long id) {
         responseTuteur response = tuteurInterface.getTuteurById(id);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping // Maps HTTP GET requests to the /api/tuteur path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<List<responseTuteur>> getAllTuteurs() {
         List<responseTuteur> response = tuteurInterface.getAllTuteurs();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/search") // Maps HTTP GET requests to the /api/tuteur/search path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<responseTuteur> getByNomTuteur(@RequestParam String nomTuteur) {
         responseTuteur response = tuteurInterface.getTuteurByNom(nomTuteur);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/page") // Maps HTTP GET requests to the /api/tuteur/page path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<Page<responseTuteur>> getAllTuteursPaginated(Pageable pageable) {
         Page<responseTuteur> response = tuteurInterface.getAllTuteursPaginated(pageable);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}") // Maps HTTP PUT requests to the /api/tuteur/{id} path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<Map<String, Object>> updateTuteur(
             @Valid @PathVariable Long id,
             @Valid @RequestBody requestTuteur request) {
@@ -82,7 +82,7 @@ public class TuteurController {
     }
 
     @DeleteMapping("/{id}") // Maps HTTP DELETE requests to the /api/tuteur/{id} path.
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GESTIONNAIRE')")
     public ResponseEntity<Map<String, String>> deleteTuteur(
             @Valid @PathVariable Long id) {
         tuteurInterface.deleteTuteur(id);

@@ -18,4 +18,9 @@ public class responseOrphelin {
     private String niveauEducation;
     private String nomTuteur;
     private String relation;
+    private Long tuteurId;
+ 
+    
+
+
 }

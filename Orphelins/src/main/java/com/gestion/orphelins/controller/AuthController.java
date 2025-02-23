@@ -70,15 +70,19 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             tokenBlacklist.addToBlacklist(token);
-            return ResponseEntity.ok("Déconnexion réussie");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Déconnexion réussie");
+            return ResponseEntity.ok(response);
         }
 
-        return ResponseEntity.badRequest().body("Token non fourni");
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", "Token non fourni");
+        return ResponseEntity.badRequest().body(errorResponse);
     }
 }

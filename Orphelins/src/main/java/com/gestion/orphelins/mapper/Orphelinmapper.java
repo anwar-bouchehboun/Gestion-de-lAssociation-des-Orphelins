@@ -30,6 +30,7 @@ public class Orphelinmapper {
                 .niveauEducation(orphelin.getNiveauEducation())
                 .nomTuteur(orphelin.getTuteur().getNom())
                 .relation(orphelin.getTuteur().getRelation())
+                .tuteurId(orphelin.getTuteur().getId())
                 .build();
     }
 }
