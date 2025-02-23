@@ -9,7 +9,6 @@ export const selectMainOrphelins = createSelector(
   (state: OrphelinState) => state.mainOrphelins
 );
 
-
 export const selectAllOrphelins = createSelector(
   selectOrphelinState,
   (state: OrphelinState) => state.orphelins
@@ -29,3 +28,21 @@ export const selectOrphelinById = (id: number) =>
   createSelector(selectAllOrphelins, (orphelins) =>
     orphelins.find((orphelin) => orphelin.id === id)
   );
+
+export const selectSearchTerm = createSelector(
+  selectOrphelinState,
+  (state: OrphelinState) => state.searchTerm
+);
+
+export const selectFilteredOrphelins = createSelector(
+  selectMainOrphelins,
+  selectSearchTerm,
+  (mainOrphelins, searchTerm) => {
+    if (!searchTerm) return mainOrphelins.items;
+    return mainOrphelins.items.filter(
+      (orphelin) =>
+        orphelin.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        orphelin.etatDeSante.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+);

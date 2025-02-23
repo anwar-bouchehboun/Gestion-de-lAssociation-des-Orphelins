@@ -5,7 +5,7 @@ import { loginGuard } from './guard/login.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ActivitesComponent } from './components/activites/activites.component';
 import { RoleGuard } from './guard/role.guard';
-import { OrphelinsListComponent } from './components/orphelins/orphelins-list/orphelins-list.component';
+import { OrphelinsListComponent } from './components/orphelins/orphelins-list.component';
 import { StatistiquesComponent } from './components/statistiques/statistiques.component';
 
 export const routes: Routes = [
@@ -36,6 +36,24 @@ export const routes: Routes = [
     component: OrphelinsListComponent,
     canActivate: [RoleGuard],
     data: { roles: ['ADMIN', 'GESTIONNAIRE', 'COLLABORATEUR'] },
+  },
+  {
+    path: 'orphelins/new',
+    loadComponent: () =>
+      import('./components/orphelins/orphelin-form.component').then(
+        (m) => m.OrphelinFormComponent
+      ),
+    canActivate: [RoleGuard],
+    data: { roles: ['ADMIN', 'GESTIONNAIRE'] },
+  },
+  {
+    path: 'orphelins/edit/:id',
+    loadComponent: () =>
+      import('./components/orphelins/orphelin-form.component').then(
+        (m) => m.OrphelinFormComponent
+      ),
+    canActivate: [RoleGuard],
+    data: { roles: ['ADMIN', 'GESTIONNAIRE'] },
   },
   {
     path: 'activites',

@@ -100,3 +100,9 @@ export const setPageSize = createAction(
   '[Orphelin] Set Page Size',
   props<{ size: number }>()
 );
+
+// Set Search Term
+export const setSearchTerm = createAction(
+  '[Orphelin] Set Search Term',
+  props<{ searchTerm: string }>()
+);

@@ -3,7 +3,8 @@ export const environment = {
   apiUrlLogin: 'http://localhost:8080/api/auth/login',
   apiUrlLogout: 'http://localhost:8080/api/auth/logout',
   apiUrlActivites: 'http://localhost:8080/api/activites',
-  apiUrlOrphelins:'http://localhost:8080/api/orphlines',
+  apiUrlOrphelins: 'http://localhost:8080/api/orphlines',
   apiUrlStatistiques: 'http://localhost:8080/api/statistiques',
-  apiUrl: 'http://localhost:8080/api/',
+  apiUrl: 'http://localhost:8080/api',
+  apiUrlTuteurs: 'http://localhost:8080/api/tuteur',
 };

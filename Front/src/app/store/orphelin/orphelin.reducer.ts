@@ -12,6 +12,7 @@ export interface OrphelinState {
   orphelins: Orphelin[];
   loading: boolean;
   error: any;
+  searchTerm: string;
 }
 
 export const initialState: OrphelinState = {
@@ -24,6 +25,7 @@ export const initialState: OrphelinState = {
   orphelins: [],
   loading: false,
   error: null,
+  searchTerm: '',
 };
 
 export const orphelinReducer = createReducer(
@@ -155,5 +157,11 @@ export const orphelinReducer = createReducer(
       ...state.mainOrphelins,
       pageSize: size,
     },
+  })),
+
+  // Set Search Term
+  on(OrphelinActions.setSearchTerm, (state, { searchTerm }) => ({
+    ...state,
+    searchTerm,
   }))
 );

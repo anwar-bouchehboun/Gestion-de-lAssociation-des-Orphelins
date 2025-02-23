@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,12 +13,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
-import * as OrphelinActions from '../../../store/orphelin/orphelin.actions';
-import * as OrphelinSelectors from '../../../store/orphelin/orphelin.selectors';
-import { Orphelin } from '../../../models/orphelin.model';
-import { OrphelinState } from '../../../store/orphelin/orphelin.reducer';
-import { AuthService } from '../../../services/auth.service';
+import { takeUntil, tap, map, filter, take } from 'rxjs/operators';
+import * as OrphelinActions from '../../store/orphelin/orphelin.actions';
+import * as OrphelinSelectors from '../../store/orphelin/orphelin.selectors';
+import { Orphelin } from '../../models/orphelin.model';
+import { OrphelinState } from '../../store/orphelin/orphelin.reducer';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -26,6 +27,8 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -73,10 +76,24 @@ import Swal from 'sweetalert2';
             >
             <input
               matInput
+              [(ngModel)]="searchTerm"
+              (keyup)="applyFilter($event)"
               placeholder="Nom, état de santé..."
               class="py-1 text-white"
             />
-            <mat-icon matSuffix class="text-red-500">search</mat-icon>
+            <button
+              *ngIf="searchTerm"
+              matSuffix
+              mat-icon-button
+              aria-label="Effacer"
+              (click)="resetSearch()"
+              class="text-red-500"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-icon *ngIf="!searchTerm" matSuffix class="text-red-500"
+              >search</mat-icon
+            >
           </mat-form-field>
         </div>
         @if (isAdmin || isGestionnaire) {
@@ -104,7 +121,7 @@ import Swal from 'sweetalert2';
           class="flex flex-col col-span-full gap-4 justify-center items-center p-8 rounded-xl backdrop-blur-md bg-white/10"
         >
           <div
-            class="w-16 h-16 rounded-full border-4 border-t-transparent border-indigo-500 animate-spin"
+            class="w-16 h-16 rounded-full border-4 border-indigo-500 animate-spin border-t-transparent"
           ></div>
           <p class="text-xl font-semibold text-white animate-pulse">
             Chargement des orphelins...
@@ -113,24 +130,24 @@ import Swal from 'sweetalert2';
             Veuillez patienter pendant le chargement des données
           </p>
         </div>
-        } @else { @for (orphelin of (mainOrphelins$ | async)?.items; track
+        } @else { @for (orphelin of filteredOrphelins$ | async; track
         orphelin.id) {
         <mat-card
-          class="relative overflow-hidden bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 border border-white/20"
+          class="overflow-hidden relative rounded-2xl border shadow-xl backdrop-blur-lg transition-all duration-500 bg-white/95 hover:shadow-2xl hover:-translate-y-1 border-white/20"
         >
           <!-- Gradient Overlay -->
           <div
-            class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-blue-500/5 pointer-events-none"
+            class="absolute inset-0 bg-gradient-to-br pointer-events-none from-red-500/5 to-blue-500/5"
           ></div>
 
           <!-- Header -->
           <div class="relative p-6 bg-gradient-to-r from-red-500 to-blue-500">
             <div class="absolute inset-0 bg-black/10"></div>
             <div class="relative z-10">
-              <h3 class="text-2xl font-bold text-white mb-2">
+              <h3 class="mb-2 text-2xl font-bold text-white">
                 {{ orphelin.nom | uppercase }}
               </h3>
-              <div class="flex items-center text-white/90 gap-2">
+              <div class="flex gap-2 items-center text-white/90">
                 <mat-icon class="text-sm">person</mat-icon>
                 <span>{{ orphelin.genre | uppercase }}</span>
               </div>
@@ -140,11 +157,11 @@ import Swal from 'sweetalert2';
           <!-- Content -->
           <div class="p-6 space-y-6">
             <!-- Âge -->
-            <div class="transform transition-all duration-300 hover:scale-105">
+            <div class="transition-all duration-300 transform hover:scale-105">
               <div
-                class="flex items-center p-4 rounded-xl bg-gradient-to-r from-red-50 to-blue-50 group-hover:from-red-100 group-hover:to-blue-100"
+                class="flex items-center p-4 bg-gradient-to-r from-red-50 to-blue-50 rounded-xl group-hover:from-red-100 group-hover:to-blue-100"
               >
-                <mat-icon class="text-red-500 mr-4">cake</mat-icon>
+                <mat-icon class="mr-4 text-red-500">cake</mat-icon>
                 <div>
                   <div class="text-sm font-medium text-gray-500">Âge</div>
                   <div class="text-lg font-bold text-gray-900">
@@ -155,11 +172,11 @@ import Swal from 'sweetalert2';
             </div>
 
             <!-- État de santé -->
-            <div class="transform transition-all duration-300 hover:scale-105">
+            <div class="transition-all duration-300 transform hover:scale-105">
               <div
-                class="flex items-center p-4 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 group-hover:from-purple-100 group-hover:to-pink-100"
+                class="flex items-center p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl group-hover:from-purple-100 group-hover:to-pink-100"
               >
-                <mat-icon class="text-purple-500 mr-4">favorite</mat-icon>
+                <mat-icon class="mr-4 text-purple-500">favorite</mat-icon>
                 <div>
                   <div class="text-sm font-medium text-gray-500">
                     État de santé
@@ -172,11 +189,11 @@ import Swal from 'sweetalert2';
             </div>
 
             <!-- Niveau d'éducation -->
-            <div class="transform transition-all duration-300 hover:scale-105">
+            <div class="transition-all duration-300 transform hover:scale-105">
               <div
-                class="flex items-center p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 group-hover:from-blue-100 group-hover:to-indigo-100"
+                class="flex items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl group-hover:from-blue-100 group-hover:to-indigo-100"
               >
-                <mat-icon class="text-blue-500 mr-4">school</mat-icon>
+                <mat-icon class="mr-4 text-blue-500">school</mat-icon>
                 <div>
                   <div class="text-sm font-medium text-gray-500">
                     Niveau d'éducation
@@ -188,11 +205,11 @@ import Swal from 'sweetalert2';
               </div>
             </div>
             <!--  relation avec le parent -->
-            <div class="transform transition-all duration-300 hover:scale-105">
+            <div class="transition-all duration-300 transform hover:scale-105">
               <div
-                class="flex items-center p-4 rounded-xl bg-gradient-to-r from-green-50 to-lime-50 group-hover:from-green-100 group-hover:to-lime-100"
+                class="flex items-center p-4 bg-gradient-to-r from-green-50 to-lime-50 rounded-xl group-hover:from-green-100 group-hover:to-lime-100"
               >
-                <mat-icon class="text-green-500 mr-4">child_care</mat-icon>
+                <mat-icon class="mr-4 text-green-500">child_care</mat-icon>
                 <div>
                   <div class="text-sm font-medium text-gray-500">
                     Relation avec le tuteur
@@ -210,11 +227,11 @@ import Swal from 'sweetalert2';
           <div
             class="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200"
           >
-            <div class="flex justify-end gap-3">
+            <div class="flex gap-3 justify-end">
               <button
                 mat-icon-button
                 (click)="editOrphelin(orphelin)"
-                class="text-blue-500 hover:bg-blue-50 transition-all duration-300"
+                class="text-blue-500 transition-all duration-300 hover:bg-blue-50"
                 matTooltip="Modifier"
               >
                 <mat-icon>edit</mat-icon>
@@ -222,7 +239,7 @@ import Swal from 'sweetalert2';
               <button
                 mat-icon-button
                 (click)="deleteOrphelin(orphelin)"
-                class="text-red-500 hover:bg-red-50 transition-all duration-300"
+                class="text-red-500 transition-all duration-300 hover:bg-red-50"
                 matTooltip="Supprimer"
               >
                 <mat-icon>delete</mat-icon>
@@ -231,13 +248,13 @@ import Swal from 'sweetalert2';
           </div>
           }
         </mat-card>
-        } @if (!(mainOrphelins$ | async)?.items?.length) {
+        } @if (!(filteredOrphelins$ | async)?.length) {
         <div class="col-span-full">
           <div
-            class="text-center py-16 bg-white/10 backdrop-blur-md rounded-3xl"
+            class="py-16 text-center rounded-3xl backdrop-blur-md bg-white/10"
           >
-            <mat-icon class="text-white/50 text-6xl mb-4">search_off</mat-icon>
-            <h3 class="text-2xl font-semibold text-white mb-2">
+            <mat-icon class="mb-4 text-6xl text-white/50">search_off</mat-icon>
+            <h3 class="mb-2 text-2xl font-semibold text-white">
               Aucun orphelin trouvé
             </h3>
             <p class="text-white/70">
@@ -250,15 +267,31 @@ import Swal from 'sweetalert2';
 
       <!-- Pagination -->
       <mat-paginator
-        [length]="(mainOrphelins$ | async)?.totalElements || 0"
-        [pageSize]="(mainOrphelins$ | async)?.pageSize || 6"
-        [pageIndex]="(mainOrphelins$ | async)?.currentPage || 0"
+        [length]="totalElements$ | async"
+        [pageSize]="pageSize$ | async"
+        [pageIndex]="currentPage$ | async"
         [pageSizeOptions]="[6, 12, 24, 50]"
         (page)="onPageChange($event)"
         showFirstLastButtons
-        class="bg-white/95 backdrop-blur-lg rounded-2xl shadow-lg"
+        class="rounded-2xl shadow-lg backdrop-blur-lg bg-white/95"
       >
       </mat-paginator>
+
+      <!-- Loading Overlay -->
+      <div
+        *ngIf="deleteLoading"
+        class="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50"
+      >
+        <div class="p-8 text-center bg-white rounded-lg shadow-xl">
+          <div
+            class="mx-auto mb-4 w-16 h-16 rounded-full border-4 border-blue-500 animate-spin border-t-transparent"
+          ></div>
+          <p class="text-lg font-semibold text-gray-700">
+            Suppression en cours...
+          </p>
+          <p class="text-sm text-gray-500">Veuillez patienter</p>
+        </div>
+      </div>
     </div>
   `,
   styles: [
@@ -355,13 +388,30 @@ import Swal from 'sweetalert2';
 })
 export class OrphelinsListComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  searchTerm: string = '';
+  deleteLoading: boolean = false;
   mainOrphelins$ = this.store
     .select(OrphelinSelectors.selectMainOrphelins)
-    .pipe(
-      takeUntil(this.destroy$),
-    );
+    .pipe(takeUntil(this.destroy$));
   loading$ = this.store.select(OrphelinSelectors.selectOrphelinLoading);
   error$ = this.store.select(OrphelinSelectors.selectOrphelinError);
+  pageSize$ = this.store.select(
+    (state) => state.orphelin.mainOrphelins.pageSize
+  );
+  currentPage$ = this.store.select(
+    (state) => state.orphelin.mainOrphelins.currentPage
+  );
+  totalElements$ = this.store.select(
+    (state) => state.orphelin.mainOrphelins.totalElements
+  );
+  filteredOrphelins$ = this.store
+    .select(OrphelinSelectors.selectFilteredOrphelins)
+    .pipe(
+      map((orphelins) => {
+        if (!orphelins) return [];
+        return [...orphelins];
+      })
+    );
 
   isAdmin: boolean = false;
   isGestionnaire: boolean = false;
@@ -389,6 +439,19 @@ export class OrphelinsListComponent implements OnInit, OnDestroy {
     this.loadOrphelinsPage(event.pageIndex, event.pageSize);
   }
 
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.searchTerm = filterValue.trim().toLowerCase();
+    this.store.dispatch(
+      OrphelinActions.setSearchTerm({ searchTerm: this.searchTerm })
+    );
+  }
+
+  resetSearch(): void {
+    this.searchTerm = '';
+    this.store.dispatch(OrphelinActions.setSearchTerm({ searchTerm: '' }));
+  }
+
   addOrphelin(): void {
     this.router.navigate(['/orphelins/new']);
   }
@@ -409,17 +472,33 @@ export class OrphelinsListComponent implements OnInit, OnDestroy {
       cancelButtonColor: '#4f46e5',
       background: 'rgba(255, 255, 255, 0.9)',
       backdrop: 'rgba(0, 0, 0, 0.4)',
-      customClass: {
-        title: 'text-xl font-bold text-gray-800',
-        htmlContainer: 'text-gray-600',
-        confirmButton: 'px-4 py-2 rounded-lg',
-        cancelButton: 'px-4 py-2 rounded-lg',
+      allowOutsideClick: false,
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        return new Promise((resolve) => {
+          this.deleteLoading = true;
+          this.store.dispatch(
+            OrphelinActions.deleteOrphelin({ id: orphelin.id! })
+          );
+
+          // Attendre que la suppression soit terminée
+          const subscription = this.store
+            .select(OrphelinSelectors.selectOrphelinLoading)
+            .pipe(
+              takeUntil(this.destroy$),
+              filter((loading) => !loading),
+              take(1)
+            )
+            .subscribe(() => {
+              this.deleteLoading = false;
+              this.loadOrphelinsPage(0, 6);
+              resolve(true);
+              subscription.unsubscribe();
+            });
+        });
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.store.dispatch(
-          OrphelinActions.deleteOrphelin({ id: orphelin.id! })
-        );
         this.showNotification('Orphelin supprimé avec succès', 'success');
       }
     });

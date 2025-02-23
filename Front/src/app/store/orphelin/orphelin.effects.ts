@@ -33,6 +33,7 @@ export class OrphelinEffects {
       ofType(OrphelinActions.createOrphelin),
       mergeMap(({ orphelin }) =>
         this.orphelinService.createOrphelin(orphelin).pipe(
+          delay(2000),
           map((newOrphelin) =>
             OrphelinActions.createOrphelinSuccess({ orphelin: newOrphelin })
           ),
@@ -49,6 +50,7 @@ export class OrphelinEffects {
       ofType(OrphelinActions.updateOrphelin),
       mergeMap(({ id, orphelin }) =>
         this.orphelinService.updateOrphelin(id, orphelin).pipe(
+          delay(2000),
           map((updatedOrphelin) =>
             OrphelinActions.updateOrphelinSuccess({ orphelin: updatedOrphelin })
           ),
@@ -95,7 +97,7 @@ export class OrphelinEffects {
       ofType(OrphelinActions.loadOrphelinsPaginated),
       mergeMap(({ page, size }) =>
         this.orphelinService.getAllOrphelinsPaginated(page, size).pipe(
-          delay(2000),
+          delay(1000),
           tap((response) => console.log('Réponse API orphelins paginés effecte:', response)),
           map((response) =>
             OrphelinActions.loadOrphelinsPaginatedSuccess({

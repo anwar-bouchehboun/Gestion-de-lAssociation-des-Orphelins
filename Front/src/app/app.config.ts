@@ -12,7 +12,8 @@ import { orphelinReducer } from './store/orphelin/orphelin.reducer';
 import { OrphelinEffects } from './store/orphelin/orphelin.effects';
 import { statistiquesReducer } from './store/statistiques/statistiques.reducer';
 import { StatistiquesEffects } from './store/statistiques/statistiques.effects';
-
+import { tuteurReducer } from './store/tuteur/tuteur.reducer';
+import { TuteurEffects } from './store/tuteur/tuteur.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,7 +24,13 @@ export const appConfig: ApplicationConfig = {
       activite: activiteReducer,
       orphelin: orphelinReducer,
       statistiques: statistiquesReducer,
+      tuteur: tuteurReducer,
     }),
-    provideEffects([ActiviteEffects, OrphelinEffects, StatistiquesEffects]),
+    provideEffects([
+      ActiviteEffects,
+      OrphelinEffects,
+      StatistiquesEffects,
+      TuteurEffects,
+    ]),
   ],
 };
