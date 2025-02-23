@@ -43,70 +43,229 @@
 
   <!-- Affichage des totaux -->
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Total Activités</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.totalActivites }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Total Dons</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.totalDons }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Total Orphelins</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.totalOrphelins }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Total Tuteurs</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.totalTuteurs }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Montant Total Activités</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.montantTotalActivites }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Montant Total Dons</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.montantTotalDons }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Orphelins Hommes</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.orphelinsHommes }}
-        </ng-container>
-      </p>
-    </div>
-    <div class="p-4 bg-white rounded border shadow">
-      <h2 class="font-semibold text-blue-800">Orphelins Femmes</h2>
-      <p class="font-semibold text-red-800">
-        <ng-container *ngIf="statistiques$ | async as statistiques">
-          {{ statistiques.orphelinsFemmes }}
-        </ng-container>
-      </p>
-    </div>
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Total Orphelins</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.totalDons }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-red-100 rounded-full"
+            >
+              <mat-icon class="text-red-600">people</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-red-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Total Dons</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.totalDons }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-blue-100 rounded-full"
+            >
+              <mat-icon class="text-blue-600">volunteer_activism</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-blue-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <!-- Total Activités -->
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Total Activités</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.totalActivites }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-green-100 rounded-full"
+            >
+              <mat-icon class="text-green-600">assignment</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-green-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <!-- Total Tuteurs -->
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Total Tuteurs</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.totalTuteurs }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-yellow-100 rounded-full"
+            >
+              <mat-icon class="text-yellow-600">person_add</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-yellow-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <!-- Montant Total Activités -->
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">
+                Montant Total Activités
+              </p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.montantTotalActivites }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-green-100 rounded-full"
+            >
+              <mat-icon class="text-green-600">monetization_on</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-green-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <!-- Montant Total Dons -->
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Montant Total Dons</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.montantTotalDons }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-blue-100 rounded-full"
+            >
+              <mat-icon class="text-blue-600">attach_money</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-blue-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <!-- Orphelins Hommes -->
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Orphelins Hommes</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.orphelinsHommes }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-blue-100 rounded-full"
+            >
+              <mat-icon class="text-blue-600">male</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-blue-500/10"
+        ></div>
+      </div>
+    </mat-card>
+
+    <!-- Orphelins Femmes -->
+    <mat-card
+      class="bg-white transition-all duration-300 stat-card hover:shadow-xl"
+    >
+      <div class="overflow-hidden relative p-6">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm font-medium text-white">Orphelins Femmes</p>
+              <p class="mt-2 text-3xl font-bold text-white">
+                <ng-container *ngIf="statistiques$ | async as statistiques">
+                  {{ statistiques.orphelinsFemmes }}
+                </ng-container>
+              </p>
+            </div>
+            <div
+              class="flex justify-center items-center w-12 h-12 bg-pink-100 rounded-full"
+            >
+              <mat-icon class="text-pink-600">female</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br to-transparent transform rotate-45 from-pink-500/10"
+        ></div>
+      </div>
+    </mat-card>
   </div>
 
   <!-- Ajout des graphiques -->
