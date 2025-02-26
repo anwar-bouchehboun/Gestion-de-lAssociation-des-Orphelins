@@ -113,7 +113,7 @@ import { Router } from '@angular/router';
               </div>
             </mat-card>
 
-          
+
           </div>
         </main>
       </div>
@@ -215,9 +215,15 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
     this.username = this.authService.getUserName();
     this.userRole = this.authService.getUserRole();
+
   }
 
   ngOnInit(): void {
+    if (!this.userRole || !this.username) {
+      this.userRole = this.authService.getUserRole() || '';
+      this.username=this.authService.getUserName()|| '';
+    }
     // Vérifier si l'utilisateur est connecté et a un rôle
+
   }
 }

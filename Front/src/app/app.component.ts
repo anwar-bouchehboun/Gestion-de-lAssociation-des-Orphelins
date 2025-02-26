@@ -25,16 +25,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 export class AppComponent implements OnInit {
   title = 'Gestion des Orphelins';
   isSidebarOpen: boolean = true;
-  username: string | null;
-  userRole: string | null;
 
   constructor(public authService: AuthService, public router: Router) {
-    this.username = this.authService.getUserName();
-    this.userRole = this.authService.getUserRole();
+
+
     this.checkScreenSize();
   }
 
   ngOnInit(): void {
+
     window.addEventListener('resize', () => this.checkScreenSize());
   }
 

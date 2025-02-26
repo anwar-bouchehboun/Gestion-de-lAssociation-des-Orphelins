@@ -1,0 +1,254 @@
+2025-02-26 17:07:01 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2025-02-26 17:07:01 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - Starting OrphelinsApplication using Java 1.8.0_411 on Anouar with PID 14064 (C:\Users\YCode\Desktop\FilRouge 2\Orphelins\target\classes started by YCode in C:\Users\YCode\Desktop\FilRouge 2)
+2025-02-26 17:07:01 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - The following 1 profile is active: "prod"
+2025-02-26 17:07:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-26 17:07:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-26 17:07:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-26 17:07:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102 ms. Found 6 JPA repository interfaces.
+2025-02-26 17:07:03 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-02-26 17:07:03 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:03 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-26 17:07:03 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-02-26 17:07:03 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-26 17:07:03 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2281 ms
+2025-02-26 17:07:03 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-26 17:07:04 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-26 17:07:04 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/orphelins_db'
+2025-02-26 17:07:04 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-26 17:07:04 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-02-26 17:07:04 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-02-26 17:07:04 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2025-02-26 17:07:05 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-02-26 17:07:05 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-26 17:07:06 [restartedMain] INFO  c.g.orphelins.config.SecurityConfig - Configuration de la chaîne de filtres de sécurité
+2025-02-26 17:07:07 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-26 17:07:08 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@54ebd99c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4fba5de0, org.springframework.security.web.context.SecurityContextPersistenceFilter@3af9fb7d, org.springframework.security.web.header.HeaderWriterFilter@2f5a8841, org.springframework.web.filter.CorsFilter@3280c461, org.springframework.security.web.authentication.logout.LogoutFilter@4b3e263c, com.gestion.orphelins.filter.JwtRequestFilter@63aff38a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@46b1b1dd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5de05fa5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@917db08, org.springframework.security.web.session.SessionManagementFilter@1ce9ae62, org.springframework.security.web.access.ExceptionTranslationFilter@47165a24, org.springframework.security.web.access.intercept.AuthorizationFilter@1984550c]
+2025-02-26 17:07:08 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2025-02-26 17:07:08 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:08 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2025-02-26 17:07:08 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-02-26 17:07:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-02-26 17:07:08 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-02-26 17:07:08 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:08 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-02-26 17:07:08 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:08 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:08 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2025-02-26 17:07:08 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-02-26 17:07:30 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2025-02-26 17:07:30 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - Starting OrphelinsApplication using Java 1.8.0_411 on Anouar with PID 14112 (C:\Users\YCode\Desktop\FilRouge 2\Orphelins\target\classes started by YCode in C:\Users\YCode\Desktop\FilRouge 2)
+2025-02-26 17:07:30 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - The following 1 profile is active: "prod"
+2025-02-26 17:07:30 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-26 17:07:30 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-26 17:07:30 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-26 17:07:31 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 75 ms. Found 6 JPA repository interfaces.
+2025-02-26 17:07:32 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-02-26 17:07:32 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:32 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-26 17:07:32 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-02-26 17:07:32 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-26 17:07:32 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2020 ms
+2025-02-26 17:07:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-26 17:07:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-26 17:07:32 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/orphelins_db'
+2025-02-26 17:07:32 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-26 17:07:32 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-02-26 17:07:32 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-02-26 17:07:33 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2025-02-26 17:07:33 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-02-26 17:07:33 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-26 17:07:35 [restartedMain] INFO  c.g.orphelins.config.SecurityConfig - Configuration de la chaîne de filtres de sécurité
+2025-02-26 17:07:35 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-26 17:07:36 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@59a91c69, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@497fa9ea, org.springframework.security.web.context.SecurityContextPersistenceFilter@7f972c4c, org.springframework.security.web.header.HeaderWriterFilter@50434ef9, org.springframework.web.filter.CorsFilter@55af33ed, org.springframework.security.web.authentication.logout.LogoutFilter@27741cd1, com.gestion.orphelins.filter.JwtRequestFilter@2c5c8ab0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5099ef07, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3649d5a4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30fcde5d, org.springframework.security.web.session.SessionManagementFilter@26605399, org.springframework.security.web.access.ExceptionTranslationFilter@4648596f, org.springframework.security.web.access.intercept.AuthorizationFilter@6bc6144]
+2025-02-26 17:07:36 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-02-26 17:07:36 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-26 17:07:36 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-02-26 17:07:36 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - Started OrphelinsApplication in 7.015 seconds (JVM running for 7.474)
+2025-02-26 17:08:58 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-26 17:08:58 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-02-26 17:08:58 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-02-26 17:08:58 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/auth/login
+2025-02-26 17:08:58 [http-nio-8080-exec-1] WARN  c.g.o.filter.JwtRequestFilter - Pas de token Bearer trouvé dans l'en-tête
+2025-02-26 17:09:07 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/statistiques
+2025-02-26 17:09:07 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:07 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:07 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:07 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:30 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:09:30 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:30 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:30 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:30 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:32 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:09:32 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:32 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:32 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:32 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines
+2025-02-26 17:09:41 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/tuteur
+2025-02-26 17:09:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:41 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:41 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:41 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:41 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:45 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/4
+2025-02-26 17:09:45 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:45 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:45 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:45 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:46 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:09:46 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:46 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:46 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:46 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:56 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines
+2025-02-26 17:09:56 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:56 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:56 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/tuteur
+2025-02-26 17:09:56 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:56 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:56 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:09:56 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:09:56 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:09:56 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:17 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/4
+2025-02-26 17:10:17 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:17 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:17 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:17 [http-nio-8080-exec-10] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:18 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:10:18 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:18 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:18 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:18 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:26 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:10:26 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:26 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:26 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:26 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:34 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:10:34 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:34 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:34 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:34 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:41 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/activites/page
+2025-02-26 17:10:41 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:41 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:41 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:41 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:51 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines
+2025-02-26 17:10:51 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:51 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/activites/page
+2025-02-26 17:10:51 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:51 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:51 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:10:51 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:51 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:10:51 [http-nio-8080-exec-4] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:10:51 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 17:11:57 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 17:11:57 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 17:11:57 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 17:11:57 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 17:11:57 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:42:07 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+2025-02-26 18:42:07 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - Starting OrphelinsApplication using Java 1.8.0_411 on Anouar with PID 11408 (C:\Users\YCode\Desktop\FilRouge 2\Orphelins\target\classes started by YCode in C:\Users\YCode\Desktop\FilRouge 2)
+2025-02-26 18:42:07 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - The following 1 profile is active: "prod"
+2025-02-26 18:42:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-26 18:42:07 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-26 18:42:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-26 18:42:08 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 122 ms. Found 6 JPA repository interfaces.
+2025-02-26 18:42:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-02-26 18:42:09 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-26 18:42:09 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-26 18:42:09 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.83]
+2025-02-26 18:42:09 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-02-26 18:42:09 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2291 ms
+2025-02-26 18:42:09 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-26 18:42:10 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-26 18:42:10 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:postgresql://localhost:5432/orphelins_db'
+2025-02-26 18:42:10 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-26 18:42:10 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2025-02-26 18:42:10 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2025-02-26 18:42:10 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2025-02-26 18:42:12 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-02-26 18:42:12 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-26 18:42:13 [restartedMain] INFO  c.g.orphelins.config.SecurityConfig - Configuration de la chaîne de filtres de sécurité
+2025-02-26 18:42:13 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-26 18:42:14 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c33cbba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58e747a7, org.springframework.security.web.context.SecurityContextPersistenceFilter@4351ea65, org.springframework.security.web.header.HeaderWriterFilter@6e42c3c4, org.springframework.web.filter.CorsFilter@484f4258, org.springframework.security.web.authentication.logout.LogoutFilter@2f93f49a, com.gestion.orphelins.filter.JwtRequestFilter@1fb6e7a4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@74807922, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2dab1d3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6df01de9, org.springframework.security.web.session.SessionManagementFilter@180c7667, org.springframework.security.web.access.ExceptionTranslationFilter@57d8ea56, org.springframework.security.web.access.intercept.AuthorizationFilter@6ef96c74]
+2025-02-26 18:42:14 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-02-26 18:42:14 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-26 18:42:14 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2025-02-26 18:42:14 [restartedMain] INFO  c.g.orphelins.OrphelinsApplication - Started OrphelinsApplication in 7.79 seconds (JVM running for 8.456)
+2025-02-26 18:42:18 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-26 18:42:18 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-02-26 18:42:18 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/auth/logout
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.s.i.TokenBlacklistService - Ajout du token à la blacklist
+2025-02-26 18:42:18 [http-nio-8080-exec-1] INFO  c.g.o.security.TokenBlacklist - Token ajouté à la blacklist. Taille actuelle: 1
+2025-02-26 18:42:39 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/auth/login
+2025-02-26 18:42:39 [http-nio-8080-exec-3] WARN  c.g.o.filter.JwtRequestFilter - Pas de token Bearer trouvé dans l'en-tête
+2025-02-26 18:42:42 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/statistiques
+2025-02-26 18:42:42 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:42:42 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:42:42 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:42:42 [http-nio-8080-exec-8] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:42:50 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/activites/page
+2025-02-26 18:42:50 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:42:50 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:42:50 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:42:50 [http-nio-8080-exec-6] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:08 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines
+2025-02-26 18:43:08 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/activites/page
+2025-02-26 18:43:08 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:08 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:08 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:43:08 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:43:08 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:43:08 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:43:08 [http-nio-8080-exec-2] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:08 [http-nio-8080-exec-1] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:15 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 18:43:15 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:15 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:43:15 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:43:15 [http-nio-8080-exec-3] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/orphlines/page
+2025-02-26 18:43:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:43:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:43:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:43:41 [http-nio-8080-exec-5] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:44:29 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/statistiques
+2025-02-26 18:44:29 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:44:29 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:44:29 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:44:29 [http-nio-8080-exec-7] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Processing request to: /api/auth/logout
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Token trouvé pour l'utilisateur: anwar@valide.com
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Rôle de l'utilisateur: ADMIN
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Rôles de l'utilisateur depuis UserDetails: [ROLE_ADMIN]
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.filter.JwtRequestFilter - Authentification réussie pour l'utilisateur: anwar@valide.com
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.s.i.TokenBlacklistService - Ajout du token à la blacklist
+2025-02-26 18:45:58 [http-nio-8080-exec-9] INFO  c.g.o.security.TokenBlacklist - Token ajouté à la blacklist. Taille actuelle: 2
